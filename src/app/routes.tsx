@@ -1,11 +1,10 @@
-import { createBrowserRouter } from 'react-router';
+﻿import { createBrowserRouter } from 'react-router';
 import { RootLayout } from './components/layouts/RootLayout';
 import { HomePage } from './pages/HomePage';
 import { ShopPage } from './pages/ShopPage';
 import { ProductPage } from './pages/ProductPage';
 import { CartPage } from './pages/CartPage';
 import { CheckoutPage } from './pages/CheckoutPage';
-import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 import { AdminPage } from './pages/AdminPage';
 import { NotFoundPage } from './pages/NotFoundPage';
@@ -21,7 +20,6 @@ export const router = createBrowserRouter([
       { path: 'product/:id', Component: ProductPage },
       { path: 'cart', Component: CartPage },
       { path: 'checkout', Component: CheckoutPage },
-      { path: 'about', Component: AboutPage },
       { path: 'contact', Component: ContactPage },
       { path: 'admin', Component: AdminPage },
       { path: '*', Component: NotFoundPage },
