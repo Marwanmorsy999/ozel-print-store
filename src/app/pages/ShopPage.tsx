@@ -23,7 +23,7 @@ export function ShopPage() {
   const categories = Array.from(new Set(products.map(p => p.category)));
   const collectionTitle = collection
     ? collection.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
-    : 'All Products';
+    : 'كل المنتجات';
 
   return (
     <div className="min-h-screen py-12 px-4">
@@ -34,11 +34,11 @@ export function ShopPage() {
           transition={{ duration: 0.6 }}
           className="mb-12"
         >
-          <h1 className="uppercase tracking-[0.2em] mb-2" style={{ fontSize: '3rem', fontWeight: 600 }}>
+          <h1 className="mb-2" style={{ fontSize: '3rem', fontWeight: 600 }}>
             {collectionTitle}
           </h1>
           <p className="text-muted-foreground">
-            {filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'}
+            {filteredProducts.length} {filteredProducts.length === 1 ? 'منتج' : 'منتجات'}
           </p>
         </motion.div>
 
@@ -52,18 +52,18 @@ export function ShopPage() {
             <div className="bg-card p-6 rounded-sm border border-border">
               <div className="flex items-center gap-2 mb-6">
                 <Filter className="w-4 h-4" />
-                <h3 className="uppercase tracking-wider">Filters</h3>
+                <h3 className="uppercase tracking-wider">فلتر</h3>
               </div>
 
               <div className="space-y-6">
                 <div>
-                  <label className="text-sm uppercase tracking-wider mb-2 block">Category</label>
+                  <label className="text-sm mb-2 block">النوع</label>
                   <Select value={selectedCategory} onValueChange={setSelectedCategory}>
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="all">All Categories</SelectItem>
+                      <SelectItem value="all">كل الأنواع</SelectItem>
                       {categories.map(cat => (
                         <SelectItem key={cat} value={cat}>{cat}</SelectItem>
                       ))}
@@ -72,16 +72,16 @@ export function ShopPage() {
                 </div>
 
                 <div>
-                  <label className="text-sm uppercase tracking-wider mb-2 block">Price Range</label>
+                  <label className="text-sm mb-2 block">نطاق السعر</label>
                   <Select value={priceRange} onValueChange={setPriceRange}>
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="all">All Prices</SelectItem>
-                      <SelectItem value="under-500">Under 500 EGP</SelectItem>
-                      <SelectItem value="500-700">500 - 700 EGP</SelectItem>
-                      <SelectItem value="over-700">Over 700 EGP</SelectItem>
+                      <SelectItem value="all">كل الأسعار</SelectItem>
+                      <SelectItem value="under-500">أقل من 500 جنيه</SelectItem>
+                      <SelectItem value="500-700">500 - 700 جنيه</SelectItem>
+                      <SelectItem value="over-700">أكتر من 700 جنيه</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -96,35 +96,19 @@ export function ShopPage() {
                     }}
                     className="w-full"
                   >
-                    Clear Filters
+                    مسح الفلاتر
                   </Button>
                 )}
               </div>
             </div>
 
             <div className="bg-card p-6 rounded-sm border border-border">
-              <h3 className="uppercase tracking-wider mb-4 text-sm">Collections</h3>
+              <h3 className="mb-4 text-sm">الكولكشنات</h3>
               <ul className="space-y-2 text-sm">
-                <li>
-                  <Link to="/shop" className="text-muted-foreground hover:text-foreground transition-colors">
-                    All Products
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/shop/uniform" className="text-muted-foreground hover:text-foreground transition-colors">
-                    Uniform
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/shop/summer-2026" className="text-muted-foreground hover:text-foreground transition-colors">
-                    Summer 2026
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/shop/winter-2026" className="text-muted-foreground hover:text-foreground transition-colors">
-                    Winter 2026
-                  </Link>
-                </li>
+                <li><Link to="/shop" className="text-muted-foreground hover:text-foreground transition-colors">كل المنتجات</Link></li>
+                <li><Link to="/shop/uniform" className="text-muted-foreground hover:text-foreground transition-colors">يونيفورم</Link></li>
+                <li><Link to="/shop/summer-2026" className="text-muted-foreground hover:text-foreground transition-colors">صيف 2026</Link></li>
+                <li><Link to="/shop/winter-2026" className="text-muted-foreground hover:text-foreground transition-colors">شتا 2026</Link></li>
               </ul>
             </div>
           </motion.aside>
@@ -150,7 +134,7 @@ export function ShopPage() {
                         {product.name}
                       </h3>
                       <p className="text-xs text-muted-foreground">{product.category}</p>
-                      <p className="font-medium">{product.price} EGP</p>
+                      <p className="font-medium">{product.price} جنيه</p>
                     </div>
                   </Link>
                 </motion.div>
@@ -159,7 +143,7 @@ export function ShopPage() {
 
             {filteredProducts.length === 0 && (
               <div className="text-center py-24">
-                <p className="text-muted-foreground">No products found matching your filters</p>
+                <p className="text-muted-foreground">مفيش منتجات بتطابق الفلتر ده</p>
               </div>
             )}
           </div>

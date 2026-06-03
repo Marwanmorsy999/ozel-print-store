@@ -16,12 +16,12 @@ export function CartPage() {
           className="text-center max-w-md"
         >
           <ShoppingBag className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
-          <h2 className="text-2xl uppercase tracking-wider mb-4">Your Cart is Empty</h2>
-          <p className="text-muted-foreground mb-8">Add some premium pieces to get started</p>
+          <h2 className="text-2xl mb-4">العربية فاضية</h2>
+          <p className="text-muted-foreground mb-8">ضيف قطع من المتجر عشان تبدأ</p>
           <Button asChild size="lg" className="bg-accent hover:bg-accent/90 uppercase tracking-wider">
             <Link to="/shop">
-              Start Shopping
-              <ArrowRight className="w-4 h-4 ml-2" />
+              ابدأ التسوق
+              <ArrowRight className="w-4 h-4 mr-2" />
             </Link>
           </Button>
         </motion.div>
@@ -37,10 +37,8 @@ export function CartPage() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-12"
         >
-          <h1 className="uppercase tracking-[0.2em] mb-2" style={{ fontSize: '3rem', fontWeight: 600 }}>
-            Shopping Cart
-          </h1>
-          <p className="text-muted-foreground">{itemCount} {itemCount === 1 ? 'item' : 'items'}</p>
+          <h1 className="mb-2" style={{ fontSize: '3rem', fontWeight: 600 }}>عربية التسوق</h1>
+          <p className="text-muted-foreground">{itemCount} {itemCount === 1 ? 'قطعة' : 'قطع'}</p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -61,7 +59,7 @@ export function CartPage() {
                   <div>
                     <h3 className="uppercase tracking-wider mb-1">{item.name}</h3>
                     <p className="text-sm text-muted-foreground">
-                      Size: {item.size} • Color: {item.color}
+                      المقاس: {item.size} • اللون: {item.color}
                     </p>
                   </div>
 
@@ -87,7 +85,7 @@ export function CartPage() {
                     </div>
 
                     <div className="flex items-center gap-4">
-                      <p className="font-medium">{item.price * item.quantity} EGP</p>
+                      <p className="font-medium">{item.price * item.quantity} جنيه</p>
                       <Button
                         variant="ghost"
                         size="icon"
@@ -109,32 +107,32 @@ export function CartPage() {
             className="lg:sticky lg:top-24 h-fit"
           >
             <div className="bg-card p-8 rounded-sm border border-border space-y-6">
-              <h3 className="uppercase tracking-wider text-lg">Order Summary</h3>
+              <h3 className="text-lg">ملخص الطلب</h3>
 
               <div className="space-y-3 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Subtotal</span>
-                  <span>{total} EGP</span>
+                  <span className="text-muted-foreground">المجموع الفرعي</span>
+                  <span>{total} جنيه</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Shipping</span>
-                  <span>Free</span>
+                  <span className="text-muted-foreground">الشحن</span>
+                  <span>مجاني</span>
                 </div>
                 <div className="border-t border-border pt-3 flex justify-between text-lg font-medium">
-                  <span>Total</span>
-                  <span>{total} EGP</span>
+                  <span>الإجمالي</span>
+                  <span>{total} جنيه</span>
                 </div>
               </div>
 
               <Button asChild size="lg" className="w-full bg-accent hover:bg-accent/90 uppercase tracking-wider">
                 <Link to="/checkout">
-                  Proceed to Checkout
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                  إتمام الطلب
+                  <ArrowRight className="w-4 h-4 mr-2" />
                 </Link>
               </Button>
 
-              <Button asChild variant="outline" size="lg" className="w-full uppercase tracking-wider">
-                <Link to="/shop">Continue Shopping</Link>
+              <Button asChild variant="outline" size="lg" className="w-full">
+                <Link to="/shop">كمّل التسوق</Link>
               </Button>
             </div>
           </motion.div>

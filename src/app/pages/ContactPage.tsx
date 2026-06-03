@@ -8,7 +8,7 @@ import { Textarea } from '../components/ui/textarea';
 export function ContactPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Message sent! (Demo)');
+    alert('اتبعت رسالتك بنجاح!');
   };
 
   return (
@@ -20,11 +20,9 @@ export function ContactPage() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h1 className="uppercase tracking-[0.2em] mb-4" style={{ fontSize: '3rem', fontWeight: 600 }}>
-            Get in Touch
-          </h1>
+          <h1 className="mb-4" style={{ fontSize: '3rem', fontWeight: 600 }}>تواصل معنا</h1>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Have questions about our products or want to collaborate? We'd love to hear from you.
+            عندك سؤال عن منتجاتنا أو عايز تتعاون معنا؟ إحنا هنا.
           </p>
         </motion.div>
 
@@ -36,31 +34,23 @@ export function ContactPage() {
           >
             <form onSubmit={handleSubmit} className="space-y-6 bg-card p-8 rounded-sm border border-border">
               <div>
-                <Label htmlFor="name">Name</Label>
+                <Label htmlFor="name">الاسم</Label>
                 <Input id="name" required className="mt-1" />
               </div>
-
               <div>
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">البريد الإلكتروني</Label>
                 <Input id="email" type="email" required className="mt-1" />
               </div>
-
               <div>
-                <Label htmlFor="subject">Subject</Label>
+                <Label htmlFor="subject">الموضوع</Label>
                 <Input id="subject" required className="mt-1" />
               </div>
-
               <div>
-                <Label htmlFor="message">Message</Label>
+                <Label htmlFor="message">الرسالة</Label>
                 <Textarea id="message" rows={6} required className="mt-1" />
               </div>
-
-              <Button
-                type="submit"
-                size="lg"
-                className="w-full bg-accent hover:bg-accent/90 uppercase tracking-wider"
-              >
-                Send Message
+              <Button type="submit" size="lg" className="w-full bg-accent hover:bg-accent/90 uppercase tracking-wider">
+                ابعت الرسالة
               </Button>
             </form>
           </motion.div>
@@ -72,63 +62,49 @@ export function ContactPage() {
             className="space-y-8"
           >
             <div className="bg-card p-8 rounded-sm border border-border">
-              <h3 className="uppercase tracking-wider mb-6">Contact Information</h3>
+              <h3 className="mb-6">بيانات التواصل</h3>
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
                   <Mail className="w-5 h-5 text-accent mt-1" />
                   <div>
-                    <p className="text-sm uppercase tracking-wider text-muted-foreground mb-1">Email</p>
-                    <a href="mailto:hello@ozel.eg" className="hover:text-accent transition-colors">
-                      hello@ozel.eg
-                    </a>
+                    <p className="text-sm text-muted-foreground mb-1">البريد الإلكتروني</p>
+                    <a href="mailto:hello@ozel.eg" className="hover:text-accent transition-colors">hello@ozel.eg</a>
                   </div>
                 </div>
-
                 <div className="flex items-start gap-4">
                   <Phone className="w-5 h-5 text-accent mt-1" />
                   <div>
-                    <p className="text-sm uppercase tracking-wider text-muted-foreground mb-1">Phone</p>
-                    <a href="tel:+201234567890" className="hover:text-accent transition-colors">
-                      +20 123 456 7890
-                    </a>
+                    <p className="text-sm text-muted-foreground mb-1">الموبايل</p>
+                    <a href="tel:+201044892192" className="hover:text-accent transition-colors">01044892192</a>
                   </div>
                 </div>
-
                 <div className="flex items-start gap-4">
                   <MapPin className="w-5 h-5 text-accent mt-1" />
                   <div>
-                    <p className="text-sm uppercase tracking-wider text-muted-foreground mb-1">Location</p>
-                    <p>Cairo, Egypt</p>
+                    <p className="text-sm text-muted-foreground mb-1">الموقع</p>
+                    <p>بنها، مصر</p>
                   </div>
                 </div>
-
                 <div className="flex items-start gap-4">
                   <Instagram className="w-5 h-5 text-accent mt-1" />
                   <div>
-                    <p className="text-sm uppercase tracking-wider text-muted-foreground mb-1">Instagram</p>
-                    <a
-                      href="https://instagram.com/ozel"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-accent transition-colors"
-                    >
-                      @ozel
-                    </a>
+                    <p className="text-sm text-muted-foreground mb-1">إنستجرام</p>
+                    <a href="https://instagram.com/ozel" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">@ozel</a>
                   </div>
                 </div>
               </div>
             </div>
 
             <div className="bg-card p-8 rounded-sm border border-border">
-              <h3 className="uppercase tracking-wider mb-4">Business Hours</h3>
+              <h3 className="mb-4">مواعيد العمل</h3>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Saturday - Thursday</span>
-                  <span>9:00 AM - 9:00 PM</span>
+                  <span className="text-muted-foreground">السبت - الخميس</span>
+                  <span>9 ص - 9 م</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Friday</span>
-                  <span>2:00 PM - 10:00 PM</span>
+                  <span className="text-muted-foreground">الجمعة</span>
+                  <span>2 م - 10 م</span>
                 </div>
               </div>
             </div>

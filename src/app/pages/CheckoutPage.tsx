@@ -13,7 +13,7 @@ export function CheckoutPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Order placed successfully! (Demo)');
+    alert('اتبعت الطلب بنجاح!');
   };
 
   return (
@@ -24,9 +24,7 @@ export function CheckoutPage() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-12"
         >
-          <h1 className="uppercase tracking-[0.2em]" style={{ fontSize: '3rem', fontWeight: 600 }}>
-            Checkout
-          </h1>
+          <h1 style={{ fontSize: '3rem', fontWeight: 600 }}>إتمام الطلب</h1>
         </motion.div>
 
         <form onSubmit={handleSubmit}>
@@ -38,34 +36,34 @@ export function CheckoutPage() {
                 transition={{ delay: 0.1 }}
                 className="bg-card p-8 rounded-sm border border-border"
               >
-                <h3 className="uppercase tracking-wider mb-6">Shipping Information</h3>
+                <h3 className="mb-6">بيانات الشحن</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="firstName">First Name</Label>
+                    <Label htmlFor="firstName">الاسم الأول</Label>
                     <Input id="firstName" required className="mt-1" />
                   </div>
                   <div>
-                    <Label htmlFor="lastName">Last Name</Label>
+                    <Label htmlFor="lastName">الاسم الأخير</Label>
                     <Input id="lastName" required className="mt-1" />
                   </div>
                   <div className="md:col-span-2">
-                    <Label htmlFor="email">Email</Label>
+                    <Label htmlFor="email">البريد الإلكتروني</Label>
                     <Input id="email" type="email" required className="mt-1" />
                   </div>
                   <div className="md:col-span-2">
-                    <Label htmlFor="phone">Phone Number</Label>
+                    <Label htmlFor="phone">رقم الموبايل</Label>
                     <Input id="phone" type="tel" required className="mt-1" />
                   </div>
                   <div className="md:col-span-2">
-                    <Label htmlFor="address">Address</Label>
+                    <Label htmlFor="address">العنوان</Label>
                     <Input id="address" required className="mt-1" />
                   </div>
                   <div>
-                    <Label htmlFor="city">City</Label>
+                    <Label htmlFor="city">المدينة</Label>
                     <Input id="city" required className="mt-1" />
                   </div>
                   <div>
-                    <Label htmlFor="postal">Postal Code</Label>
+                    <Label htmlFor="postal">الرمز البريدي</Label>
                     <Input id="postal" className="mt-1" />
                   </div>
                 </div>
@@ -77,28 +75,28 @@ export function CheckoutPage() {
                 transition={{ delay: 0.2 }}
                 className="bg-card p-8 rounded-sm border border-border"
               >
-                <h3 className="uppercase tracking-wider mb-6">Payment Method</h3>
+                <h3 className="mb-6">طريقة الدفع</h3>
                 <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod}>
                   <div className="space-y-4">
                     <div className="flex items-center space-x-3 p-4 border border-border rounded-sm cursor-pointer hover:border-accent transition-colors">
                       <RadioGroupItem value="cod" id="cod" />
                       <Label htmlFor="cod" className="flex items-center gap-3 cursor-pointer flex-1">
                         <Banknote className="w-5 h-5" />
-                        <span>Cash on Delivery</span>
+                        <span>الدفع عند الاستلام</span>
                       </Label>
                     </div>
                     <div className="flex items-center space-x-3 p-4 border border-border rounded-sm cursor-pointer hover:border-accent transition-colors">
                       <RadioGroupItem value="fawry" id="fawry" />
                       <Label htmlFor="fawry" className="flex items-center gap-3 cursor-pointer flex-1">
                         <Wallet className="w-5 h-5" />
-                        <span>Fawry</span>
+                        <span>فوري</span>
                       </Label>
                     </div>
                     <div className="flex items-center space-x-3 p-4 border border-border rounded-sm cursor-pointer hover:border-accent transition-colors">
                       <RadioGroupItem value="valu" id="valu" />
                       <Label htmlFor="valu" className="flex items-center gap-3 cursor-pointer flex-1">
                         <CreditCard className="w-5 h-5" />
-                        <span>Valu Installments</span>
+                        <span>تقسيط فاليو</span>
                       </Label>
                     </div>
                   </div>
@@ -113,7 +111,7 @@ export function CheckoutPage() {
               className="lg:sticky lg:top-24 h-fit"
             >
               <div className="bg-card p-8 rounded-sm border border-border space-y-6">
-                <h3 className="uppercase tracking-wider">Order Summary</h3>
+                <h3>ملخص الطلب</h3>
 
                 <div className="space-y-3">
                   {items.map(item => (
@@ -121,23 +119,23 @@ export function CheckoutPage() {
                       <span className="text-muted-foreground">
                         {item.name} × {item.quantity}
                       </span>
-                      <span>{item.price * item.quantity} EGP</span>
+                      <span>{item.price * item.quantity} جنيه</span>
                     </div>
                   ))}
                 </div>
 
                 <div className="border-t border-border pt-4 space-y-2 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">Subtotal</span>
-                    <span>{total} EGP</span>
+                    <span className="text-muted-foreground">المجموع الفرعي</span>
+                    <span>{total} جنيه</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">Shipping</span>
-                    <span>Free</span>
+                    <span className="text-muted-foreground">الشحن</span>
+                    <span>مجاني</span>
                   </div>
                   <div className="flex justify-between text-lg font-medium pt-2">
-                    <span>Total</span>
-                    <span>{total} EGP</span>
+                    <span>الإجمالي</span>
+                    <span>{total} جنيه</span>
                   </div>
                 </div>
 
@@ -146,7 +144,7 @@ export function CheckoutPage() {
                   size="lg"
                   className="w-full bg-accent hover:bg-accent/90 uppercase tracking-wider"
                 >
-                  Place Order
+                  تأكيد الطلب
                 </Button>
               </div>
             </motion.div>
