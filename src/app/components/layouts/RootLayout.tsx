@@ -1,4 +1,4 @@
-cat > src/app/components/layouts/RootLayout.tsx << 'EOF'
+cat > src/app/components/layouts/RootLayout.tsx << 'ENDOFFILE'
 import { Outlet } from 'react-router';
 import { Navigation } from '../Navigation';
 import { Footer } from '../Footer';
@@ -20,5 +20,4 @@ export function RootLayout() {
     </LanguageProvider>
   );
 }
-EOF
-}
+ENDOFFILE
