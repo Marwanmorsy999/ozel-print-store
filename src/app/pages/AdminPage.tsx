@@ -1,4 +1,4 @@
-﻿import { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Plus, Package, TrendingUp, Users, DollarSign, Lock } from 'lucide-react';
 import { products } from '../data/products';
@@ -90,7 +90,7 @@ export function AdminPage() {
               <h1 className="uppercase tracking-[0.2em] mb-2" style={{ fontSize: '3rem', fontWeight: 600 }}>
                 Admin Dashboard
               </h1>
-              <p className="text-muted-foreground">Manage your ÖZEL store</p>
+              <p className="text-muted-foreground">Manage your ?ZEL store</p>
             </div>
             <Button
               onClick={() => setShowAddProduct(!showAddProduct)}
@@ -112,7 +112,7 @@ export function AdminPage() {
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm uppercase tracking-wider">{stat.title}</CardTitle>
-                    <stat.icon className={w-4 h-4 } />
+                    <stat.icon className={`w-4 h-4 ${stat.color}`} />
                   </CardHeader>
                   <CardContent>
                     <div className="text-2xl font-bold">{stat.value}</div>
