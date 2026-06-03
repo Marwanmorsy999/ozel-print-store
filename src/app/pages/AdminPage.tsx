@@ -1,6 +1,6 @@
-﻿import { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'motion/react';
-import { Package, DollarSign, Lock, CheckCircle, Printer, Box, Truck, ShoppingBag, Plus, Trash2 } from 'lucide-react';
+import { Package, DollarSign, Lock, CheckCircle, Printer, Box, Truck, ShoppingBag, Plus, Trash2, Upload } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
@@ -29,6 +29,7 @@ export function AdminPage() {
   const [form, setForm] = useState(emptyForm);
   const [saving, setSaving] = useState(false);
   const [saveMsg, setSaveMsg] = useState('');
+  const [uploadingImages, setUploadingImages] = useState(false);
   const { orders, loading: ordersLoading, updateOrderStatus } = useOrders();
   const { products, loading: productsLoading, addProduct, deleteProduct } = useProducts();
 
@@ -36,6 +37,36 @@ export function AdminPage() {
     e.preventDefault();
     if (password === ADMIN_PASSWORD) { setIsAuthenticated(true); setAuthError(''); }
     else setAuthError('Wrong password');
+  };
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || []);
+    if (!files.length) return;
+    setUploadingImages(true);
+    try {
+      const urls = await Promise.all(files.map(async (file) => {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET);
+        const res = await fetch(
+          `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`,
+          { method: 'POST', body: formData }
+        );
+        const data = await res.json();
+        return data.secure_url as string;
+      }));
+      const existing = form.images ? form.images.split(',').filter(Boolean) : [];
+      setForm({ ...form, images: [...existing, ...urls].join(',') });
+    } catch (err) {
+      console.error('Upload failed:', err);
+    } finally {
+      setUploadingImages(false);
+    }
+  };
+
+  const removeImage = (index: number) => {
+    const imgs = form.images.split(',').filter((_, i) => i !== index).join(',');
+    setForm({ ...form, images: imgs });
   };
 
   const handleAddProduct = async (e: React.FormEvent) => {
@@ -234,16 +265,48 @@ export function AdminPage() {
                     <Label>Colors <span className="text-muted-foreground text-xs">(Name:#hex)</span></Label>
                     <Input className="mt-1" value={form.colors} onChange={e => setForm({...form, colors: e.target.value})} placeholder="Black:#000000, White:#ffffff" />
                   </div>
+
+                  {/* Cloudinary Image Upload */}
                   <div>
-                    <Label>Image URLs <span className="text-muted-foreground text-xs">(comma separated)</span></Label>
-                    <Input className="mt-1" value={form.images} onChange={e => setForm({...form, images: e.target.value})} placeholder="https://..." />
+                    <Label>Product Images</Label>
+                    <div className="mt-1 space-y-3">
+                      <label className="flex items-center justify-center gap-3 w-full p-4 border-2 border-dashed border-border rounded-sm cursor-pointer hover:border-accent transition-colors">
+                        <Upload className="w-4 h-4 text-muted-foreground" />
+                        <span className="text-sm text-muted-foreground">
+                          {uploadingImages ? 'Uploading...' : 'Click to upload images'}
+                        </span>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          multiple
+                          className="hidden"
+                          onChange={handleImageUpload}
+                          disabled={uploadingImages}
+                        />
+                      </label>
+                      {form.images && (
+                        <div className="flex flex-wrap gap-2">
+                          {form.images.split(',').filter(Boolean).map((url, i) => (
+                            <div key={i} className="relative w-20 h-20 group">
+                              <img src={url.trim()} alt="" className="w-full h-full object-cover rounded-sm" />
+                              <button
+                                type="button"
+                                onClick={() => removeImage(i)}
+                                className="absolute -top-1 -right-1 w-5 h-5 bg-destructive rounded-full text-white text-xs flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                              >×</button>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </div>
+
                   <div className="flex items-center gap-3">
                     <input type="checkbox" id="featured" checked={form.featured} onChange={e => setForm({...form, featured: e.target.checked})} className="w-4 h-4 accent-red-600" />
                     <Label htmlFor="featured">Featured on homepage</Label>
                   </div>
                   {saveMsg && <p className={`text-sm ${saveMsg.startsWith('✅') ? 'text-green-500' : 'text-red-500'}`}>{saveMsg}</p>}
-                  <Button type="submit" disabled={saving} className="w-full bg-accent hover:bg-accent/90 uppercase tracking-wider">
+                  <Button type="submit" disabled={saving || uploadingImages} className="w-full bg-accent hover:bg-accent/90 uppercase tracking-wider">
                     <Plus className="w-4 h-4 mr-2" />{saving ? 'Saving...' : 'Add Product'}
                   </Button>
                 </form>
@@ -259,13 +322,20 @@ export function AdminPage() {
                     <table className="w-full">
                       <thead className="border-b border-border">
                         <tr className="text-left text-sm uppercase tracking-wider text-muted-foreground">
-                          <th className="p-4">Name</th><th className="p-4">Category</th><th className="p-4">Collection</th>
+                          <th className="p-4">Image</th><th className="p-4">Name</th><th className="p-4">Category</th><th className="p-4">Collection</th>
                           <th className="p-4">Price</th><th className="p-4">Featured</th><th className="p-4">Delete</th>
                         </tr>
                       </thead>
                       <tbody>
                         {products.map(product => (
                           <tr key={product.id} className="border-b border-border hover:bg-muted/50">
+                            <td className="p-4">
+                              {product.images?.[0] ? (
+                                <img src={product.images[0]} alt={product.name} className="w-12 h-12 object-cover rounded-sm" />
+                              ) : (
+                                <div className="w-12 h-12 bg-muted rounded-sm flex items-center justify-center text-xs text-muted-foreground">No img</div>
+                              )}
+                            </td>
                             <td className="p-4 font-medium">{product.name}</td>
                             <td className="p-4 text-sm text-muted-foreground">{product.category}</td>
                             <td className="p-4 text-sm text-muted-foreground">{product.collection}</td>
