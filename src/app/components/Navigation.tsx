@@ -1,5 +1,4 @@
-@'
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { Link } from 'react-router';
 import { ShoppingBag, Menu, X } from 'lucide-react';
 import { useCart } from '../context/CartContext';
@@ -105,4 +104,3 @@ export function Navigation() {
     </nav>
   );
 }
-'@ | Set-Content -Path src/app/components/Navigation.tsx -Encoding UTF8
