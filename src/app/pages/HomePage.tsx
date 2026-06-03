@@ -2,9 +2,10 @@
 import { motion } from 'motion/react';
 import { ArrowRight, Printer, Users, ShoppingBag } from 'lucide-react';
 import { Button } from '../components/ui/button';
-import { products } from '../data/products';
+import { useProducts } from '../../lib/useProducts';
 
 export function HomePage() {
+  const { products, loading } = useProducts();
   const featuredProducts = products.filter(p => p.featured);
 
   return (
@@ -12,7 +13,6 @@ export function HomePage() {
       <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background/50 to-background z-10" />
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1558769132-cb1aea5f8cf5?w=1920&q=80')] bg-cover bg-center opacity-30" />
-
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -28,7 +28,6 @@ export function HomePage() {
             <Printer className="w-4 h-4 text-accent" />
             <span className="text-sm uppercase tracking-wider text-accent">مصنع طباعة مخصص</span>
           </motion.div>
-
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -38,7 +37,6 @@ export function HomePage() {
           >
             اختار قطعتك<br />وضيف طباعتك
           </motion.h1>
-
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -47,7 +45,6 @@ export function HomePage() {
           >
             طباعة مخصصة ويونيفورم مباشرة من المصنع. أي كمية من قطعة واحدة لأوردرات جملة.
           </motion.p>
-
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -75,47 +72,27 @@ export function HomePage() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="mb-4" style={{ fontSize: '2.5rem', fontWeight: 600 }}>
-              إيه اللي بنعمله
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              مصنع طباعة احترافي بيخدم مصر بجودة وحرفية
-            </p>
+            <h2 className="mb-4" style={{ fontSize: '2.5rem', fontWeight: 600 }}>إيه اللي بنعمله</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">مصنع طباعة احترافي بيخدم مصر بجودة وحرفية</p>
           </motion.div>
-
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              {
-                icon: ShoppingBag,
-                title: 'طباعة مخصصة',
-                desc: 'اختار أي قطعة فاضية من المتجر وضيف طباعتك عليها. أي تصميم وأي لون.'
-              },
-              {
-                icon: Users,
-                title: 'يونيفورم وجملة',
-                desc: 'يونيفورم شركات ومدارس وفرق. أي كمية من 10 لـ 1000+ قطعة.'
-              },
-              {
-                icon: Printer,
-                title: 'مباشرة من المصنع',
-                desc: 'من غير وسيط. أسعار المصنع. تسليم سريع. جودة مضمونة.'
-              }
+              { icon: ShoppingBag, title: 'طباعة مخصصة', desc: 'اختار أي قطعة فاضية من المتجر وضيف طباعتك عليها.' },
+              { icon: Users, title: 'يونيفورم وجملة', desc: 'يونيفورم شركات ومدارس وفرق. أي كمية من 10 لـ 1000+ قطعة.' },
+              { icon: Printer, title: 'مباشرة من المصنع', desc: 'من غير وسيط. أسعار المصنع. تسليم سريع. جودة مضمونة.' }
             ].map((item, index) => (
               <motion.div
                 key={item.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.6 }}
+                transition={{ delay: index * 0.1 }}
                 className="text-center p-6 bg-card rounded-sm border border-border"
               >
                 <item.icon className="w-10 h-10 mx-auto mb-4 text-accent" />
-                <h3 className="mb-2" style={{ fontSize: '1.25rem', fontWeight: 600 }}>
-                  {item.title}
-                </h3>
+                <h3 className="mb-2" style={{ fontSize: '1.25rem', fontWeight: 600 }}>{item.title}</h3>
                 <p className="text-sm text-muted-foreground">{item.desc}</p>
               </motion.div>
             ))}
@@ -129,50 +106,47 @@ export function HomePage() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="mb-4" style={{ fontSize: '2.5rem', fontWeight: 600 }}>
-              القطع الفاضية المتاحة
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              اختار من كتالوج الملابس الفاضية، وبعدين ضيف طباعتك
-            </p>
+            <h2 className="mb-4" style={{ fontSize: '2.5rem', fontWeight: 600 }}>القطع الفاضية المتاحة</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">اختار من كتالوج الملابس الفاضية، وبعدين ضيف طباعتك</p>
           </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredProducts.slice(0, 6).map((product, index) => (
-              <motion.div
-                key={product.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.6 }}
-              >
-                <Link to={`/product/${product.id}`} className="group">
-                  <div className="relative aspect-[3/4] bg-card rounded-sm overflow-hidden mb-4">
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
-                    <div className="absolute inset-0 bg-muted flex items-center justify-center">
-                      <span className="text-6xl opacity-20">{product.category[0]}</span>
+          {loading ? (
+            <div className="text-center py-12 text-muted-foreground">جاري التحميل...</div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {featuredProducts.slice(0, 6).map((product, index) => (
+                <motion.div
+                  key={product.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <Link to={`/product/${product.id}`} className="group">
+                    <div className="relative aspect-[3/4] bg-card rounded-sm overflow-hidden mb-4">
+                      {product.images?.[0] ? (
+                        <img src={product.images[0]} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                      ) : (
+                        <div className="absolute inset-0 bg-muted flex items-center justify-center">
+                          <span className="text-6xl opacity-20">{product.category[0]}</span>
+                        </div>
+                      )}
                     </div>
-                  </div>
-                  <div className="space-y-1">
-                    <h3 className="uppercase tracking-wider group-hover:text-accent transition-colors">
-                      {product.name}
-                    </h3>
-                    <p className="text-sm text-muted-foreground">{product.category}</p>
-                    <p className="font-medium">{product.price} جنيه</p>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-
+                    <div className="space-y-1">
+                      <h3 className="uppercase tracking-wider group-hover:text-accent transition-colors">{product.name}</h3>
+                      <p className="text-sm text-muted-foreground">{product.category}</p>
+                      <p className="font-medium">{product.price} جنيه</p>
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          )}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
             className="text-center mt-12"
           >
             <Button asChild variant="outline" size="lg" className="uppercase tracking-wider">
@@ -198,12 +172,10 @@ export function HomePage() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.6 }}
+                transition={{ delay: index * 0.1 }}
                 className="text-center"
               >
-                <h3 className="mb-2" style={{ fontSize: '1.25rem', fontWeight: 600 }}>
-                  {item.title}
-                </h3>
+                <h3 className="mb-2" style={{ fontSize: '1.25rem', fontWeight: 600 }}>{item.title}</h3>
                 <p className="text-muted-foreground">{item.desc}</p>
               </motion.div>
             ))}
