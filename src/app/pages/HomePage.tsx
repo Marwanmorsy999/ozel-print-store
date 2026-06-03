@@ -1,6 +1,6 @@
-import { Link } from 'react-router';
+﻿import { Link } from 'react-router';
 import { motion } from 'motion/react';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, Sparkles, Printer, Users, ShoppingBag } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { products } from '../data/products';
 
@@ -25,8 +25,8 @@ export function HomePage() {
             transition={{ delay: 0.2, duration: 0.6 }}
             className="mb-6 inline-flex items-center gap-2 px-4 py-2 bg-accent/10 border border-accent/20 rounded-full"
           >
-            <Sparkles className="w-4 h-4 text-accent" />
-            <span className="text-sm uppercase tracking-wider text-accent">Summer 2026 Collection</span>
+            <Printer className="w-4 h-4 text-accent" />
+            <span className="text-sm uppercase tracking-wider text-accent">Custom Printing Factory</span>
           </motion.div>
 
           <motion.h1
@@ -34,9 +34,9 @@ export function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
             className="mb-6 uppercase tracking-[0.3em]"
-            style={{ fontSize: 'clamp(2rem, 8vw, 5rem)', fontWeight: 700, lineHeight: 1.1 }}
+            style={{ fontSize: 'clamp(2rem, 8vw, 4.5rem)', fontWeight: 700, lineHeight: 1.1 }}
           >
-            Made with<br />Good Hands
+            Pick Your Piece<br />Add Your Print
           </motion.h1>
 
           <motion.p
@@ -45,7 +45,7 @@ export function HomePage() {
             transition={{ delay: 0.6, duration: 0.8 }}
             className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto"
           >
-            Premium Egyptian streetwear and uniforms crafted with precision and passion
+            Factory direct custom printing & uniforms. Any quantity. From 1 piece to bulk orders.
           </motion.p>
 
           <motion.div
@@ -56,12 +56,14 @@ export function HomePage() {
           >
             <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground uppercase tracking-wider">
               <Link to="/shop">
-                Shop Now
-                <ArrowRight className="w-4 h-4 ml-2" />
+                Choose Blank Piece
+                <ShoppingBag className="w-4 h-4 ml-2" />
               </Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="uppercase tracking-wider">
-              <Link to="/about">Learn More</Link>
+              <a href="https://wa.me/201044892192" target="_blank" rel="noopener noreferrer">
+                Bulk Order Quote
+              </a>
             </Button>
           </motion.div>
         </motion.div>
@@ -77,15 +79,69 @@ export function HomePage() {
             className="text-center mb-16"
           >
             <h2 className="uppercase tracking-[0.2em] mb-4" style={{ fontSize: '2.5rem', fontWeight: 600 }}>
-              Featured Collection
+              What We Do
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Explore our signature pieces, meticulously crafted for those who demand excellence
+              Professional printing factory serving Egypt with quality craftsmanship
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                icon: ShoppingBag,
+                title: 'Custom Printing',
+                desc: 'Pick any blank piece from our shop and add your custom print. Any design, any color.'
+              },
+              {
+                icon: Users,
+                title: 'Uniforms & Bulk',
+                desc: 'Corporate uniforms, school uniforms, team gear. Any quantity from 10 to 1000+ pieces.'
+              },
+              {
+                icon: Printer,
+                title: 'Factory Direct',
+                desc: 'No middleman. Factory prices. Fast turnaround. Quality guaranteed.'
+              }
+            ].map((item, index) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, duration: 0.6 }}
+                className="text-center p-6 bg-card rounded-sm border border-border"
+              >
+                <item.icon className="w-10 h-10 mx-auto mb-4 text-accent" />
+                <h3 className="uppercase tracking-wider mb-2" style={{ fontSize: '1.25rem', fontWeight: 600 }}>
+                  {item.title}
+                </h3>
+                <p className="text-sm text-muted-foreground">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 px-4">
+        <div className="container mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="uppercase tracking-[0.2em] mb-4" style={{ fontSize: '2.5rem', fontWeight: 600 }}>
+              Blank Pieces Available
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Choose from our catalog of premium blank clothing, then add your print
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredProducts.map((product, index) => (
+            {featuredProducts.slice(0, 6).map((product, index) => (
               <motion.div
                 key={product.id}
                 initial={{ opacity: 0, y: 30 }}
@@ -93,7 +149,7 @@ export function HomePage() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.6 }}
               >
-                <Link to={`/product/${product.id}`} className="group">
+                <Link to={/product/} className="group">
                   <div className="relative aspect-[3/4] bg-card rounded-sm overflow-hidden mb-4">
                     <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
                     <div className="absolute inset-0 bg-muted flex items-center justify-center">
@@ -121,7 +177,7 @@ export function HomePage() {
           >
             <Button asChild variant="outline" size="lg" className="uppercase tracking-wider">
               <Link to="/shop">
-                View All Products
+                View All Blank Pieces
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Link>
             </Button>
@@ -133,9 +189,9 @@ export function HomePage() {
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {[
-              { title: 'Premium Quality', desc: 'Each piece is crafted with meticulous attention to detail' },
-              { title: 'Egyptian Made', desc: 'Proudly manufactured in Egypt with global standards' },
-              { title: 'Authentic Style', desc: 'Streetwear aesthetic meets professional craftsmanship' }
+              { title: 'Any Quantity', desc: 'From 1 piece to 1000+. No minimum order.' },
+              { title: 'Factory Prices', desc: 'Direct from manufacturer. No middleman markup.' },
+              { title: 'Fast Turnaround', desc: 'Quality printing delivered on time.' }
             ].map((item, index) => (
               <motion.div
                 key={item.title}
