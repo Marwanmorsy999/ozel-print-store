@@ -1,7 +1,10 @@
 import { motion } from 'motion/react';
 import { Heart, Sparkles, Award } from 'lucide-react';
+import { useLang } from '../context/LanguageContext';
 
 export function AboutPage() {
+  const { t } = useLang();
+
   return (
     <div className="min-h-screen">
       <section className="relative py-24 px-4">
@@ -13,10 +16,10 @@ export function AboutPage() {
             className="text-center mb-16"
           >
             <h1 className="uppercase tracking-[0.2em] mb-6" style={{ fontSize: '3rem', fontWeight: 600 }}>
-              Made with Good Hands
+              {t('Made with Good Hands', 'مصنوع بإيدين أمينة')}
             </h1>
             <p className="text-xl text-muted-foreground italic">
-              Egyptian craftsmanship meets global standards
+              {t('Egyptian craftsmanship meets global standards', 'الصنعة المصرية بمعايير عالمية')}
             </p>
           </motion.div>
 
@@ -25,18 +28,18 @@ export function AboutPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="prose prose-invert max-w-none"
           >
             <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-              ÖZEL is more than a clothing brand. We are a movement of Egyptian artisans, designers, and creators
-              who believe in the power of quality craftsmanship. Every piece we create carries the spirit of our
-              heritage and the precision of modern design.
+              {t(
+                'ÖZEL is more than a clothing brand. We are a movement of Egyptian artisans, designers, and creators who believe in the power of quality craftsmanship. Every piece we create carries the spirit of our heritage and the precision of modern design.',
+                'ÖZEL مش مجرد براند ملابس. إحنا حركة من الحرفيين والمصممين المصريين اللي بيؤمنوا بقوة الشغل الأصيل. كل قطعة بنعملها بتحمل روح تراثنا ودقة التصميم الحديث.'
+              )}
             </p>
-
             <p className="text-lg text-muted-foreground leading-relaxed mb-12">
-              From professional uniforms to contemporary streetwear, each garment is made with good hands—
-              hands that care about every stitch, every detail, every customer. We take pride in creating
-              pieces that last, pieces that matter, pieces that tell your story.
+              {t(
+                'From professional uniforms to contemporary streetwear, each garment is made with good hands — hands that care about every stitch, every detail, every customer.',
+                'من اليونيفورم الاحترافي للستريتوير العصري، كل قطعة بتتعمل بإيدين أمينة — إيدين بتهتم بكل غرزة، كل تفصيلة، كل زبون.'
+              )}
             </p>
           </motion.div>
 
@@ -44,18 +47,27 @@ export function AboutPage() {
             {[
               {
                 icon: Heart,
-                title: 'Crafted with Care',
-                desc: 'Every piece is made with attention to detail and genuine care for quality'
+                title: t('Crafted with Care', 'مصنوع باهتمام'),
+                desc: t(
+                  'Every piece is made with attention to detail and genuine care for quality',
+                  'كل قطعة بتتعمل باهتمام بالتفاصيل وحرص حقيقي على الجودة'
+                )
               },
               {
                 icon: Sparkles,
-                title: 'Egyptian Pride',
-                desc: 'Proudly designed and manufactured in Egypt with local expertise'
+                title: t('Egyptian Pride', 'فخر مصري'),
+                desc: t(
+                  'Proudly designed and manufactured in Egypt with local expertise',
+                  'مصمم ومصنوع في مصر بأيدي مصرية بكل فخر'
+                )
               },
               {
                 icon: Award,
-                title: 'Premium Quality',
-                desc: 'We never compromise on materials or craftsmanship'
+                title: t('Premium Quality', 'جودة عالية'),
+                desc: t(
+                  'We never compromise on materials or craftsmanship',
+                  'مش بنتنازل أبدًا عن الخامة ولا جودة التنفيذ'
+                )
               }
             ].map((item, index) => (
               <motion.div
@@ -85,12 +97,13 @@ export function AboutPage() {
             className="text-center"
           >
             <h2 className="uppercase tracking-[0.2em] mb-6" style={{ fontSize: '2rem', fontWeight: 600 }}>
-              Our Promise
+              {t('Our Promise', 'وعدنا ليك')}
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              We promise to deliver premium quality clothing that reflects the best of Egyptian craftsmanship.
-              Every piece is made with good hands, honest work, and a commitment to excellence that you can
-              feel the moment you wear it.
+              {t(
+                'We promise to deliver premium quality clothing that reflects the best of Egyptian craftsmanship. Every piece is made with good hands, honest work, and a commitment to excellence.',
+                'بنوعدك إننا نوصّلك ملابس بجودة عالية تعكس أحسن ما في الصنعة المصرية. كل قطعة بتتعمل بإيدين أمينة، وشغل نضيف، والتزام بالتميز.'
+              )}
             </p>
           </motion.div>
         </div>
