@@ -1,6 +1,6 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { motion } from 'motion/react';
-import { Plus, Package, TrendingUp, Users, DollarSign } from 'lucide-react';
+import { Plus, Package, TrendingUp, Users, DollarSign, Lock } from 'lucide-react';
 import { products } from '../data/products';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
@@ -9,8 +9,66 @@ import { Textarea } from '../components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 
+const ADMIN_PASSWORD = 'ozel2026'; // Change this to your preferred password
+
 export function AdminPage() {
   const [showAddProduct, setShowAddProduct] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password === ADMIN_PASSWORD) {
+      setIsAuthenticated(true);
+      setError('');
+    } else {
+      setError('Wrong password');
+    }
+  };
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen flex items-center justify-center px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="w-full max-w-md"
+        >
+          <div className="bg-card p-8 rounded-sm border border-border">
+            <div className="text-center mb-6">
+              <Lock className="w-12 h-12 mx-auto text-accent mb-4" />
+              <h1 className="uppercase tracking-[0.2em] mb-2" style={{ fontSize: '1.5rem', fontWeight: 600 }}>
+                Admin Access
+              </h1>
+              <p className="text-muted-foreground">Enter password to continue</p>
+            </div>
+            <form onSubmit={handleLogin} className="space-y-4">
+              <div>
+                <Label htmlFor="password">Password</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="mt-1"
+                  placeholder="Enter admin password"
+                  autoFocus
+                />
+              </div>
+              {error && <p className="text-red-500 text-sm">{error}</p>}
+              <Button type="submit" className="w-full bg-accent hover:bg-accent/90 uppercase tracking-wider">
+                Login
+              </Button>
+            </form>
+            <p className="text-xs text-muted-foreground text-center mt-4">
+              Default password: ozel2026 (change in code)
+            </p>
+          </div>
+        </motion.div>
+      </div>
+    );
+  }
 
   const stats = [
     { title: 'Total Products', value: products.length, icon: Package, color: 'text-blue-500' },
@@ -54,7 +112,7 @@ export function AdminPage() {
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm uppercase tracking-wider">{stat.title}</CardTitle>
-                    <stat.icon className={`w-4 h-4 ${stat.color}`} />
+                    <stat.icon className={w-4 h-4 } />
                   </CardHeader>
                   <CardContent>
                     <div className="text-2xl font-bold">{stat.value}</div>
