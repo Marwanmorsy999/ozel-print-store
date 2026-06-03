@@ -1,13 +1,16 @@
+@'
 import { useState } from 'react';
 import { Link } from 'react-router';
 import { ShoppingBag, Menu, X } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { useLang } from '../context/LanguageContext';
 import { Button } from './ui/button';
 import { motion, AnimatePresence } from 'motion/react';
 import logoImage from '../../imports/WhatsApp_Image_2026-06-03_at_1.33.15_PM.jpeg';
 
 export function Navigation() {
   const { itemCount } = useCart();
+  const { toggleLang, isAr } = useLang();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const links = [
@@ -42,6 +45,13 @@ export function Navigation() {
           </div>
 
           <div className="flex items-center gap-4">
+            <button
+              onClick={toggleLang}
+              className="text-sm font-medium text-white hover:text-red-500 transition-colors border border-red-500 rounded px-2 py-1 bg-black"
+            >
+              {isAr ? 'EN' : 'ع'}
+            </button>
+
             <Link to="/cart" className="relative">
               <Button variant="ghost" size="icon" className="relative">
                 <ShoppingBag className="w-5 h-5" />
@@ -95,3 +105,4 @@ export function Navigation() {
     </nav>
   );
 }
+'@ | Set-Content -Path src/app/components/Navigation.tsx -Encoding UTF8
