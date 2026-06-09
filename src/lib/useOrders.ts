@@ -24,6 +24,11 @@ export function useOrders() {
   const [loading, setLoading] = useState(true);
 
   const fetchOrders = async () => {
+    if (!supabase) {
+      setOrders([]);
+      setLoading(false);
+      return;
+    }
     try {
       const { data, error } = await supabase
         .from('orders')
@@ -44,6 +49,7 @@ export function useOrders() {
   }, []);
 
   const updateOrderStatus = async (orderId: string, status: Order['status']) => {
+    if (!supabase) return;
     const { error } = await supabase
       .from('orders')
       .update({ status })

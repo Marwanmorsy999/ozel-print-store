@@ -23,6 +23,13 @@ export function CheckoutPage() {
     e.preventDefault();
     setSubmitting(true);
     try {
+      if (!supabase) {
+        // Preview/local mode without a backend: simulate a successful order.
+        clearCart();
+        toast.success('اتبعت الطلب بنجاح!');
+        navigate('/');
+        return;
+      }
       const { error } = await supabase.from('orders').insert([{
         customer_name: `${form.firstName} ${form.lastName}`,
         customer_email: form.email,

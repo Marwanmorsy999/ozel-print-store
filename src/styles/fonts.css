@@ -1,0 +1,9 @@
+/* Premium streetwear type system.
+   - Cairo: primary Arabic + Latin UI/body font (supports RTL well).
+   - Oswald: condensed display accent for Latin wordmarks, numbers, labels. */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Oswald:wght@500;600;700&display=swap');
+
+:root {
+  --font-sans: 'Cairo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Oswald', 'Cairo', system-ui, sans-serif;
+}
