@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router';
 import { ShoppingBag, Menu, X } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { Button } from './ui/button';
+import { CartDrawer } from './CartDrawer';
 import { motion, AnimatePresence } from 'motion/react';
 import logoImage from '../../imports/WhatsApp_Image_2026-06-03_at_1.33.15_PM.jpeg';
 
@@ -17,6 +18,7 @@ const links = [
 export function Navigation() {
   const { itemCount } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
 
   return (
     <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border">
@@ -53,21 +55,25 @@ export function Navigation() {
           </div>
 
           <div className="flex items-center gap-2">
-            <Link to="/cart">
-              <Button variant="ghost" size="icon" className="relative" aria-label="العربية">
-                <ShoppingBag className="w-5 h-5" />
-                {itemCount > 0 && (
-                  <motion.span
-                    key={itemCount}
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className="absolute -top-1 -right-1 bg-accent text-accent-foreground text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center"
-                  >
-                    {itemCount}
-                  </motion.span>
-                )}
-              </Button>
-            </Link>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="relative"
+              aria-label="العربية"
+              onClick={() => setCartOpen(true)}
+            >
+              <ShoppingBag className="w-5 h-5" />
+              {itemCount > 0 && (
+                <motion.span
+                  key={itemCount}
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  className="absolute -top-1 -right-1 bg-accent text-accent-foreground text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center"
+                >
+                  {itemCount}
+                </motion.span>
+              )}
+            </Button>
 
             <Button
               variant="ghost"
@@ -110,6 +116,8 @@ export function Navigation() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <CartDrawer open={cartOpen} onOpenChange={setCartOpen} />
     </nav>
   );
 }

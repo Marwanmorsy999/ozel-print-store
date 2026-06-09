@@ -1,14 +1,15 @@
 import { useRef, useState, useCallback } from 'react';
-import { Upload, Trash2, RotateCcw, Sparkles, ImageIcon, ShoppingBag } from 'lucide-react';
+import { Upload, Trash2, RotateCcw, Sparkles, ImageIcon, ShoppingBag, Check } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from './ui/button';
 import { Slider } from './ui/slider';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import { CUSTOM_PRINT_FEE, type CustomPrint } from '../context/CartContext';
 import type { Product } from '../../lib/useProducts';
 
 interface CustomizePrintProps {
   product: Product;
-  onAddCustomized?: () => void;
+  onAddCustomized?: (custom: CustomPrint) => boolean | void;
 }
 
 export function CustomizePrint({ product, onAddCustomized }: CustomizePrintProps) {
@@ -20,8 +21,10 @@ export function CustomizePrint({ product, onAddCustomized }: CustomizePrintProps
   const [pos, setPos] = useState({ x: 50, y: 45 }); // percentage within preview
   const [scale, setScale] = useState(35); // width as % of container
   const [rotation, setRotation] = useState(0);
+  const [added, setAdded] = useState(false);
 
   const baseImage = product.images?.[0];
+  const totalPrice = product.price + CUSTOM_PRINT_FEE;
 
   const handleFile = useCallback((file: File | undefined) => {
     if (!file) return;
@@ -80,6 +83,14 @@ export function CustomizePrint({ product, onAddCustomized }: CustomizePrintProps
     if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
+  const handleAdd = () => {
+    if (!design) return;
+    const ok = onAddCustomized?.({ design, x: pos.x, y: pos.y, scale, rotation, fee: CUSTOM_PRINT_FEE });
+    if (ok === false) return;
+    setAdded(true);
+    setTimeout(() => setAdded(false), 2000);
+  };
+
   return (
     <section className="mt-16 border-t border-border pt-12">
       <div className="flex items-center gap-2 mb-2">
@@ -114,11 +125,13 @@ export function CustomizePrint({ product, onAddCustomized }: CustomizePrintProps
             </div>
           )}
 
+          {/* Suggested print area guide (only while designing) */}
           {design && (
-            <img
-              src={design}
-              alt="تصميمك"
-              draggable={false}
+            <div className="absolute inset-x-[22%] inset-y-[20%] border border-dashed border-white/30 rounded-md pointer-events-none" />
+          )}
+
+          {design && (
+            <div
               style={{
                 position: 'absolute',
                 left: `${pos.x}%`,
@@ -126,8 +139,18 @@ export function CustomizePrint({ product, onAddCustomized }: CustomizePrintProps
                 width: `${scale}%`,
                 transform: `translate(-50%, -50%) rotate(${rotation}deg)`,
               }}
-              className="pointer-events-none drop-shadow-[0_4px_12px_rgba(0,0,0,0.4)]"
-            />
+              className="pointer-events-none"
+            >
+              <img
+                src={design}
+                alt="تصميمك"
+                draggable={false}
+                className="w-full h-auto drop-shadow-[0_6px_16px_rgba(0,0,0,0.45)]"
+                style={{ mixBlendMode: 'multiply' }}
+              />
+              {/* selection ring to make placement obvious */}
+              <span className="absolute -inset-2 border border-accent/60 rounded-md" />
+            </div>
           )}
 
           {!design && (
@@ -138,7 +161,7 @@ export function CustomizePrint({ product, onAddCustomized }: CustomizePrintProps
           )}
 
           <span className="absolute top-3 start-3 text-[10px] eyebrow bg-background/70 text-muted-foreground px-2 py-1 rounded">
-            معاينة
+            معاينة حية
           </span>
         </div>
 
@@ -151,6 +174,24 @@ export function CustomizePrint({ product, onAddCustomized }: CustomizePrintProps
             className="hidden"
             onChange={e => handleFile(e.target.files?.[0])}
           />
+
+          {/* Price breakdown */}
+          <div className="rounded-lg border border-border bg-card p-4 space-y-2 text-sm">
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">سعر القطعة</span>
+              <span>{product.price} جنيه</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-muted-foreground flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-accent" /> رسوم الطباعة المخصصة
+              </span>
+              <span className="text-accent font-semibold">+{CUSTOM_PRINT_FEE} جنيه</span>
+            </div>
+            <div className="border-t border-border pt-2 flex justify-between font-bold text-base">
+              <span>الإجمالي للقطعة</span>
+              <span className="font-display">{totalPrice} جنيه</span>
+            </div>
+          </div>
 
           {!design ? (
             <button
@@ -195,20 +236,22 @@ export function CustomizePrint({ product, onAddCustomized }: CustomizePrintProps
               </div>
 
               <p className="text-xs text-muted-foreground">
-                تلميح: اسحب التصميم على القطعة عشان تظبط مكانه.
+                تلميح: اسحب التصميم على القطعة عشان تظبط مكانه. اختار المقاس واللون فوق قبل الإضافة.
               </p>
             </>
           )}
 
           <Button
             size="lg"
-            disabled={!design}
-            onClick={() => {
-              onAddCustomized?.();
-            }}
+            disabled={!design || added}
+            onClick={handleAdd}
             className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-bold h-12 disabled:opacity-50"
           >
-            <ShoppingBag className="w-5 h-5" /> ضيف للعربية مع الطباعة
+            {added ? (
+              <><Check className="w-5 h-5" /> اتضافت للعربية</>
+            ) : (
+              <><ShoppingBag className="w-5 h-5" /> ضيف للعربية مع الطباعة — {totalPrice} جنيه</>
+            )}
           </Button>
         </div>
       </div>
