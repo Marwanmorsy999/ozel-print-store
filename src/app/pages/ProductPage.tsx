@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router';
 import { motion } from 'motion/react';
 import { ShoppingBag, ArrowRight, Check, Minus, Plus, Truck, ShieldCheck, Factory } from 'lucide-react';
 import { useProducts } from '../../lib/useProducts';
-import { useCart } from '../context/CartContext';
+import { useCart, CUSTOM_PRINT_FEE, type CustomPrint } from '../context/CartContext';
 import { Button } from '../components/ui/button';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { CustomizePrint } from '../components/CustomizePrint';
@@ -48,25 +48,35 @@ export function ProductPage() {
 
   const handleAddToCart = () => {
     if (!requireSelection()) return;
-    for (let i = 0; i < quantity; i++) {
-      addItem({ id: product.id, name: product.name, price: product.price, image: images[0] || '', size: selectedSize, color: selectedColor });
-    }
+    addItem(
+      {
+        id: product.id,
+        name: product.name,
+        basePrice: product.price,
+        image: images[0] || '',
+        size: selectedSize,
+        color: selectedColor,
+      },
+      quantity
+    );
     setAddedToCart(true);
     toast.success('اتضاف للعربية');
     setTimeout(() => setAddedToCart(false), 2000);
   };
 
-  const handleAddCustomized = () => {
-    if (!requireSelection()) return;
+  const handleAddCustomized = (custom: CustomPrint): boolean => {
+    if (!requireSelection()) return false;
     addItem({
       id: `${product.id}-custom`,
       name: `${product.name} — مخصص بطباعة`,
-      price: product.price,
+      basePrice: product.price,
       image: images[0] || '',
       size: selectedSize,
       color: selectedColor,
+      custom,
     });
-    toast.success('اتضافت القطعة المخصصة للعربية');
+    toast.success(`اتضافت القطعة المخصصة للعربية (+${CUSTOM_PRINT_FEE} جنيه طباعة)`);
+    return true;
   };
 
   return (
