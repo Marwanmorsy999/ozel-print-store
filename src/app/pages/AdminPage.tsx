@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { Package, DollarSign, Lock, CheckCircle, Printer, Box, Truck, ShoppingBag, Plus, Trash2, Upload, AlertTriangle } from 'lucide-react';
+import { Package, DollarSign, Lock, CheckCircle, Printer, Box, Truck, ShoppingBag, Plus, Trash2, Upload } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
