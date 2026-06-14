@@ -47,7 +47,7 @@ export function Footer() {
               <a href="https://wa.me/201044892192" target="_blank" rel="noopener noreferrer" aria-label="واتساب" className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-accent hover:border-accent transition-colors">
                 <MessageCircle className="w-4 h-4" />
               </a>
-              <a href="https://instagram.com/ozel" target="_blank" rel="noopener noreferrer" aria-label="انستجرام" className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-accent hover:border-accent transition-colors">
+              <a href="https://www.instagram.com/ozel_print" target="_blank" rel="noopener noreferrer" aria-label="انستجرام" className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-accent hover:border-accent transition-colors">
                 <Instagram className="w-4 h-4" />
               </a>
               <a href="mailto:hello@ozel.eg" aria-label="إيميل" className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-accent hover:border-accent transition-colors">

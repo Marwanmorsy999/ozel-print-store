@@ -112,7 +112,7 @@ export function ContactPage() {
                   <Instagram className="w-5 h-5 text-accent mt-1" />
                   <div>
                     <p className="text-sm text-muted-foreground mb-1">إنستجرام</p>
-                    <a href="https://instagram.com/ozel" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">@ozel</a>
+                    <a href="https://www.instagram.com/ozel_print" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">@ozel_print</a>
                   </div>
                 </div>
               </div>
