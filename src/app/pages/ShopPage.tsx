@@ -139,7 +139,7 @@ export function ShopPage() {
                 <li><Link to="/shop/winter-2026" className="text-muted-foreground hover:text-foreground transition-colors">شتا 2026</Link></li>
               </ul>
             </div>
-          </motion.aside>
+          </aside>
 
           <div className="flex-1">
             {/* Toolbar: search + sort + mobile filter */}
