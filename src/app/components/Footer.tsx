@@ -20,10 +20,7 @@ export function Footer() {
           <div>
             <h4 className="font-bold tracking-wide mb-4 text-sm">المتجر</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
- HEAD
               <li><Link to="/shop" className="hover:text-foreground transition-colors">كل المنتجات</Link></li>
-=======
- d27eff01 (Update components and pages)
               <li><Link to="/shop/uniform" className="hover:text-foreground transition-colors">يونيفورم</Link></li>
               <li><Link to="/shop/summer-2026" className="hover:text-foreground transition-colors">صيف 2026</Link></li>
               <li><Link to="/shop/winter-2026" className="hover:text-foreground transition-colors">شتا 2026</Link></li>
@@ -34,36 +31,21 @@ export function Footer() {
             <h4 className="font-bold tracking-wide mb-4 text-sm">الشركة</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><Link to="/contact" className="hover:text-foreground transition-colors">تواصل معنا</Link></li>
-               HEAD
               <li>
                 <a href="https://wa.me/201044892192" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
                   أسعار الجملة
                 </a>
               </li>
-              <li className="flex items-center gap-2"><MapPin className="w-3.5 h-3.5" /> القاهرة، مصر</li>
-=======
               <li><Link to="/admin" className="hover:text-foreground transition-colors">Admin</Link></li>
-> d27eff01 (Update components and pages)
+              <li className="flex items-center gap-2"><MapPin className="w-3.5 h-3.5" /> القاهرة، مصر</li>
             </ul>
           </div>
 
           <div>
-           HEAD
             <h4 className="font-bold tracking-wide mb-4 text-sm">تواصل</h4>
             <div className="flex gap-3">
               <a href="https://wa.me/201044892192" target="_blank" rel="noopener noreferrer" aria-label="واتساب" className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-accent hover:border-accent transition-colors">
                 <MessageCircle className="w-4 h-4" />
-
-            <h4 className="uppercase tracking-wider mb-4 text-sm">تواصل</h4>
-            <div className="flex gap-4">
-              <a
-                href="https://instagram.com/ozel"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-accent transition-colors"
-              >
-                <Instagram className="w-5 h-5" />
->>>>>>> d27eff01 (Update components and pages)
               </a>
               <a href="https://instagram.com/ozel" target="_blank" rel="noopener noreferrer" aria-label="انستجرام" className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-accent hover:border-accent transition-colors">
                 <Instagram className="w-4 h-4" />
