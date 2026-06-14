@@ -105,7 +105,7 @@ export function ContactPage() {
                   <MapPin className="w-5 h-5 text-accent mt-1" />
                   <div>
                     <p className="text-sm text-muted-foreground mb-1">الموقع</p>
-                    <p>بنها، مصر</p>
+                    <p>بنها، الفلل، الميدان<br />أمام أفريقيا ستور</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">

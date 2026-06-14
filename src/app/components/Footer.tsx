@@ -37,7 +37,7 @@ export function Footer() {
                 </a>
               </li>
               <li><Link to="/admin" className="hover:text-foreground transition-colors">Admin</Link></li>
-              <li className="flex items-center gap-2"><MapPin className="w-3.5 h-3.5" /> القاهرة، مصر</li>
+              <li className="flex items-center gap-2"><MapPin className="w-3.5 h-3.5 flex-shrink-0" /> بنها، الفلل، الميدان — أمام أفريقيا ستور</li>
             </ul>
           </div>
 
