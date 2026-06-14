@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { Package, DollarSign, Lock, CheckCircle, Printer, Box, Truck, ShoppingBag, Plus, Trash2, Upload } from 'lucide-react';
+import { Package, DollarSign, Lock, CheckCircle, Printer, Box, Truck, ShoppingBag, Plus, Trash2, Upload, AlertTriangle } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
@@ -8,7 +8,10 @@ import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { useOrders, Order } from '../../lib/useOrders';
 import { useProducts } from '../../lib/useProducts';
+import { toast } from 'sonner';
 
+// TODO: Replace this with proper Supabase Auth for production.
+// Client-side passwords are NEVER secure — they're visible in browser dev tools.
 const ADMIN_PASSWORD = 'ozel2026';
 
 const statusConfig = {
@@ -92,7 +95,8 @@ export function AdminPage() {
   const handleDelete = async (id: string, name: string) => {
     if (!confirm(`هتحذف "${name}"؟`)) return;
     const error = await deleteProduct(id);
-    if (error) alert('Error: ' + error.message);
+    if (error) toast.error('Error: ' + error.message);
+    else toast.success('تم حذف المنتج');
   };
 
   if (!isAuthenticated) {
@@ -100,6 +104,10 @@ export function AdminPage() {
       <div className="min-h-screen flex items-center justify-center px-4">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-md">
           <div className="bg-card p-8 rounded-sm border border-border">
+            <div className="flex items-center gap-2 mb-4 p-3 bg-yellow-500/10 border border-yellow-500/20 rounded-sm">
+              <AlertTriangle className="w-4 h-4 text-yellow-500 flex-shrink-0" />
+              <p className="text-xs text-yellow-500">Client-side auth only. Use Supabase Auth for production.</p>
+            </div>
             <div className="text-center mb-6">
               <Lock className="w-12 h-12 mx-auto text-accent mb-4" />
               <h1 className="uppercase tracking-[0.2em] mb-2" style={{ fontSize: '1.5rem', fontWeight: 600 }}>Admin Access</h1>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Link } from 'react-router';
+import { useNavigate } from 'react-router';
 import { motion } from 'motion/react';
-import { CreditCard, Banknote, Wallet, Sparkles, CheckCircle2, Loader2, ShoppingBag } from 'lucide-react';
+import { CreditCard, Banknote, Wallet } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
@@ -36,23 +36,6 @@ export function CheckoutPage() {
   const [form, setForm] = useState<FormState>({
     firstName: '', lastName: '', email: '', phone: '', address: '', city: '', postal: '',
   });
-
-  const setField = (key: keyof FormState, value: string) => {
-    setForm(prev => ({ ...prev, [key]: value }));
-    if (errors[key]) setErrors(prev => ({ ...prev, [key]: undefined }));
-  };
-
-  const validate = () => {
-    const next: Partial<Record<keyof FormState, string>> = {};
-    if (!form.firstName.trim()) next.firstName = 'مطلوب';
-    if (!form.lastName.trim()) next.lastName = 'مطلوب';
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) next.email = 'بريد إلكتروني غير صحيح';
-    if (!/^01[0-2,5]{1}[0-9]{8}$/.test(form.phone.replace(/\s/g, ''))) next.phone = 'رقم موبايل مصري غير صحيح';
-    if (!form.address.trim()) next.address = 'مطلوب';
-    if (!form.city.trim()) next.city = 'مطلوب';
-    setErrors(next);
-    return Object.keys(next).length === 0;
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -91,8 +74,7 @@ export function CheckoutPage() {
       setPlacedOrder({ id: orderId, method: paymentMethod });
       toast.success('اتبعت الطلب بنجاح!');
     } catch (err) {
-      console.error('Order submission failed:', err);
-      toast.error('في مشكلة في إرسال الطلب. حاول تاني.');
+      toast.error('في مشكلة. حاول تاني.');
     } finally {
       setSubmitting(false);
     }

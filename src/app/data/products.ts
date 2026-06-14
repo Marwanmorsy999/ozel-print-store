@@ -1,3 +1,10 @@
+export interface PrintArea {
+  left: number;
+  top: number;
+  width: number;
+  height: number;
+}
+
 export interface Product {
   id: string;
   name: string;
@@ -10,6 +17,8 @@ export interface Product {
   colors: { name: string; value: string }[];
   material?: string;
   featured?: boolean;
+  /** Print area as percentages of the product image (left, top, width, height) */
+  printArea?: PrintArea;
 }
 
 const img = (id: string) =>
@@ -31,7 +40,6 @@ export const products: Product[] = [
       { name: 'Black', value: '#000000' },
       { name: 'Navy', value: '#1e3a8a' }
     ],
-    material: 'قطن بريميوم 100%',
     featured: true
   },
   {
@@ -49,7 +57,6 @@ export const products: Product[] = [
       { name: 'Charcoal', value: '#36454F' },
       { name: 'Navy', value: '#1e3a8a' }
     ],
-    material: 'تويل قطن مخلوط',
     featured: true
   },
   {
@@ -67,9 +74,7 @@ export const products: Product[] = [
       { name: 'Black', value: '#000000' },
       { name: 'Navy', value: '#1e3a8a' },
       { name: 'Burgundy', value: '#800020' }
-    ],
-    material: 'بيكيه قطن',
-    featured: true
+    ]
   },
   {
     id: 'summer-tee-001',
@@ -86,7 +91,6 @@ export const products: Product[] = [
       { name: 'Black', value: '#000000' },
       { name: 'Sand', value: '#C2B280' }
     ],
-    material: 'قطن مفرد 180 جرام',
     featured: true
   },
   {
@@ -103,8 +107,7 @@ export const products: Product[] = [
       { name: 'Black', value: '#000000' },
       { name: 'Khaki', value: '#C3B091' },
       { name: 'Olive', value: '#556B2F' }
-    ],
-    material: 'قطن خفيف'
+    ]
   },
   {
     id: 'summer-tank-001',
@@ -120,8 +123,7 @@ export const products: Product[] = [
       { name: 'White', value: '#FFFFFF' },
       { name: 'Black', value: '#000000' },
       { name: 'Grey', value: '#808080' }
-    ],
-    material: 'بوليستر رياضي'
+    ]
   },
   {
     id: 'winter-hoodie-001',
@@ -138,7 +140,6 @@ export const products: Product[] = [
       { name: 'Charcoal', value: '#36454F' },
       { name: 'Deep Red', value: '#8B0000' }
     ],
-    material: 'قطن مبطن 320 جرام',
     featured: true
   },
   {
@@ -155,7 +156,6 @@ export const products: Product[] = [
       { name: 'Black', value: '#000000' },
       { name: 'Navy', value: '#1e3a8a' }
     ],
-    material: 'قماش مقاوم للماء',
     featured: true
   },
   {
@@ -172,8 +172,7 @@ export const products: Product[] = [
       { name: 'Black', value: '#000000' },
       { name: 'Cream', value: '#FFFDD0' },
       { name: 'Charcoal', value: '#36454F' }
-    ],
-    material: 'تريكو قطن'
+    ]
   },
   {
     id: 'winter-pants-001',
@@ -189,7 +188,6 @@ export const products: Product[] = [
       { name: 'Black', value: '#000000' },
       { name: 'Olive', value: '#556B2F' },
       { name: 'Charcoal', value: '#36454F' }
-    ],
-    material: 'قطن كارجو متين'
+    ]
   }
 ];

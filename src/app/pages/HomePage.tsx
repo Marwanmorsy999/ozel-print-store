@@ -28,7 +28,7 @@ const collections = [
 
 export function HomePage() {
   const { products, loading } = useProducts();
-  const featuredProducts = products.filter(p => p.featured);
+  const featuredProducts = (products || []).filter(p => p.featured);
 
   return (
     <div className="min-h-screen">

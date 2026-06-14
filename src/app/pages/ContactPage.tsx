@@ -1,14 +1,37 @@
+import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Instagram, Mail, MapPin, Phone } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { Textarea } from '../components/ui/textarea';
+import { supabase } from '../../lib/supabase';
+import { toast } from 'sonner';
 
 export function ContactPage() {
-  const handleSubmit = (e: React.FormEvent) => {
+  const [submitting, setSubmitting] = useState(false);
+  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert('اتبعت رسالتك بنجاح!');
+    setSubmitting(true);
+    try {
+      const { error } = await supabase.from('messages').insert([{
+        name: form.name,
+        email: form.email,
+        subject: form.subject,
+        message: form.message,
+        status: 'new',
+      }]);
+      if (error) throw error;
+      toast.success('اتبعتت رسالتك بنجاح!');
+      setForm({ name: '', email: '', subject: '', message: '' });
+    } catch (err) {
+      console.error('Contact form error:', err);
+      toast.error('في مشكلة في إرسال الرسالة. حاول تاني.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -35,22 +58,22 @@ export function ContactPage() {
             <form onSubmit={handleSubmit} className="space-y-6 bg-card p-8 rounded-sm border border-border">
               <div>
                 <Label htmlFor="name">الاسم</Label>
-                <Input id="name" required className="mt-1" />
+                <Input id="name" required className="mt-1" value={form.name} onChange={e => setForm({...form, name: e.target.value})} />
               </div>
               <div>
                 <Label htmlFor="email">البريد الإلكتروني</Label>
-                <Input id="email" type="email" required className="mt-1" />
+                <Input id="email" type="email" required className="mt-1" value={form.email} onChange={e => setForm({...form, email: e.target.value})} />
               </div>
               <div>
                 <Label htmlFor="subject">الموضوع</Label>
-                <Input id="subject" required className="mt-1" />
+                <Input id="subject" required className="mt-1" value={form.subject} onChange={e => setForm({...form, subject: e.target.value})} />
               </div>
               <div>
                 <Label htmlFor="message">الرسالة</Label>
-                <Textarea id="message" rows={6} required className="mt-1" />
+                <Textarea id="message" rows={6} required className="mt-1" value={form.message} onChange={e => setForm({...form, message: e.target.value})} />
               </div>
-              <Button type="submit" size="lg" className="w-full bg-accent hover:bg-accent/90 uppercase tracking-wider">
-                ابعت الرسالة
+              <Button type="submit" disabled={submitting} size="lg" className="w-full bg-accent hover:bg-accent/90 uppercase tracking-wider">
+                {submitting ? 'جاري الإرسال...' : 'ابعت الرسالة'}
               </Button>
             </form>
           </motion.div>

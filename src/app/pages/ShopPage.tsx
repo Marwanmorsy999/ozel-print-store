@@ -130,7 +130,16 @@ export function ShopPage() {
               </div>
               <FilterControls />
             </div>
-          </aside>
+            <div className="bg-card p-6 rounded-sm border border-border">
+              <h3 className="mb-4 text-sm">الكولكشنات</h3>
+              <ul className="space-y-2 text-sm">
+                <li><Link to="/shop" className="text-muted-foreground hover:text-foreground transition-colors">كل المنتجات</Link></li>
+                <li><Link to="/shop/uniform" className="text-muted-foreground hover:text-foreground transition-colors">يونيفورم</Link></li>
+                <li><Link to="/shop/summer-2026" className="text-muted-foreground hover:text-foreground transition-colors">صيف 2026</Link></li>
+                <li><Link to="/shop/winter-2026" className="text-muted-foreground hover:text-foreground transition-colors">شتا 2026</Link></li>
+              </ul>
+            </div>
+          </motion.aside>
 
           <div className="flex-1">
             {/* Toolbar: search + sort + mobile filter */}

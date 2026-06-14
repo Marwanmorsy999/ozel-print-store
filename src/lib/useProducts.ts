@@ -14,6 +14,7 @@ export interface Product {
   colors: { name: string; value: string }[];
   material?: string;
   featured?: boolean;
+  printArea?: { left: number; top: number; width: number; height: number };
 }
 
 export function useProducts() {
