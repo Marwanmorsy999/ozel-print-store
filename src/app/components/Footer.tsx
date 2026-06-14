@@ -13,7 +13,7 @@ export function Footer() {
               <span className="font-display text-2xl font-bold tracking-[0.2em]">ÖZEL</span>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
-              مصنع طباعة مخصص ويونيفورم في مصر. اختار قطعتك وضيف طباعتك. أي كمية من قطعة لـ 1000+.
+              مصنع طباعة وتطريز مخصص ويونيفورم في مصر. اختار قطعتك وضيف طباعتك أو تطريزك. أي كمية من قطعة لـ 1000+.
             </p>
           </div>
 

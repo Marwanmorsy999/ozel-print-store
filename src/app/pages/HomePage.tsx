@@ -51,7 +51,7 @@ export function HomePage() {
             className="mb-8 inline-flex items-center gap-2 px-4 py-2 bg-accent/10 border border-accent/30 rounded-full"
           >
             <Printer className="w-4 h-4 text-accent" />
-            <span className="eyebrow text-accent">مصنع طباعة مخصص — مصر</span>
+            <span className="eyebrow text-accent">مصنع طباعة وتطريز مخصص — مصر</span>
           </motion.div>
 
           <h1
@@ -64,7 +64,7 @@ export function HomePage() {
           </h1>
 
           <p className="text-base md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
-            طباعة مخصصة ويونيفورم مباشرة من المصنع. اختار أي قطعة فاضية، ارفع تصميمك، وشوف
+            طباعة وتطريز مخصص ويونيفورم مباشرة من المصنع. اختار أي قطعة فاضية، ارفع تصميمك، وشوف
             المعاينة قبل ما تطلب. أي كمية من قطعة لـ 1000+.
           </p>
 
