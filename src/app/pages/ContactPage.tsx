@@ -123,11 +123,11 @@ export function ContactPage() {
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">السبت - الخميس</span>
-                  <span>12 م - 9 م</span>
+                  <span>12 م - 12 ص</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">الجمعة</span>
-                  <span>2 م - 10 م</span>
+                  <span>3 م - 12 ص</span>
                 </div>
               </div>
             </div>
