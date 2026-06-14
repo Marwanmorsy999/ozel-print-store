@@ -104,10 +104,6 @@ export function AdminPage() {
       <div className="min-h-screen flex items-center justify-center px-4">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-md">
           <div className="bg-card p-8 rounded-sm border border-border">
-            <div className="flex items-center gap-2 mb-4 p-3 bg-yellow-500/10 border border-yellow-500/20 rounded-sm">
-              <AlertTriangle className="w-4 h-4 text-yellow-500 flex-shrink-0" />
-              <p className="text-xs text-yellow-500">Client-side auth only. Use Supabase Auth for production.</p>
-            </div>
             <div className="text-center mb-6">
               <Lock className="w-12 h-12 mx-auto text-accent mb-4" />
               <h1 className="uppercase tracking-[0.2em] mb-2" style={{ fontSize: '1.5rem', fontWeight: 600 }}>Admin Access</h1>
