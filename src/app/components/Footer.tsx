@@ -23,7 +23,6 @@ export function Footer() {
               <li><Link to="/shop" className="hover:text-foreground transition-colors">كل المنتجات</Link></li>
               <li><Link to="/shop/uniform" className="hover:text-foreground transition-colors">يونيفورم</Link></li>
               <li><Link to="/shop/summer-2026" className="hover:text-foreground transition-colors">صيف 2026</Link></li>
-              <li><Link to="/shop/winter-2026" className="hover:text-foreground transition-colors">شتا 2026</Link></li>
             </ul>
           </div>
 

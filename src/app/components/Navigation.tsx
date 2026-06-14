@@ -11,7 +11,7 @@ const links = [
   { to: '/', label: 'الرئيسية', end: true },
   { to: '/shop', label: 'المتجر' },
   { to: '/shop/uniform', label: 'يونيفورم' },
-  { to: '/shop/winter-2026', label: 'شتا 2026' },
+  { to: '/shop/summer-2026', label: 'صيف 2026' },
   { to: '/contact', label: 'تواصل' },
 ];
 

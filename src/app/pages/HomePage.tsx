@@ -18,12 +18,6 @@ const collections = [
     desc: 'تيشيرتات • شورتات',
     image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=900&q=80&auto=format&fit=crop',
   },
-  {
-    slug: 'winter-2026',
-    title: 'شتا 2026',
-    desc: 'هوديز • جواكت',
-    image: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=900&q=80&auto=format&fit=crop',
-  },
 ];
 
 export function HomePage() {

@@ -19,7 +19,6 @@ const collectionLinks = [
   { slug: '', label: 'كل المنتجات' },
   { slug: 'uniform', label: 'يونيفورم' },
   { slug: 'summer-2026', label: 'صيف 2026' },
-  { slug: 'winter-2026', label: 'شتا 2026' },
 ];
 
 export function ShopPage() {
@@ -136,7 +135,6 @@ export function ShopPage() {
                 <li><Link to="/shop" className="text-muted-foreground hover:text-foreground transition-colors">كل المنتجات</Link></li>
                 <li><Link to="/shop/uniform" className="text-muted-foreground hover:text-foreground transition-colors">يونيفورم</Link></li>
                 <li><Link to="/shop/summer-2026" className="text-muted-foreground hover:text-foreground transition-colors">صيف 2026</Link></li>
-                <li><Link to="/shop/winter-2026" className="text-muted-foreground hover:text-foreground transition-colors">شتا 2026</Link></li>
               </ul>
             </div>
           </aside>
