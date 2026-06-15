@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { motion } from 'motion/react';
-import { Package, DollarSign, Lock, CheckCircle, Printer, Box, Truck, ShoppingBag, Plus, Trash2, Upload } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Package, DollarSign, Lock, CheckCircle, Printer, Box, Truck, ShoppingBag, Plus, Trash2, Upload, X, Sparkles } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
@@ -10,8 +10,6 @@ import { useOrders, Order } from '../../lib/useOrders';
 import { useProducts } from '../../lib/useProducts';
 import { toast } from 'sonner';
 
-// TODO: Replace this with proper Supabase Auth for production.
-// Client-side passwords are NEVER secure — they're visible in browser dev tools.
 const ADMIN_PASSWORD = 'ozel2026';
 
 const statusConfig = {
@@ -24,6 +22,105 @@ const statusConfig = {
 
 const emptyForm = { name: '', price: '', description: '', collection: 'uniform', category: '', images: '', sizes: '', colors: '', featured: false };
 
+function OrderModal({ order, onClose }: { order: Order; onClose: () => void }) {
+  return (
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4"
+        onClick={onClose}
+      >
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          className="bg-card border border-border rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+          onClick={e => e.stopPropagation()}
+        >
+          <div className="flex items-center justify-between p-6 border-b border-border">
+            <div>
+              <h2 className="font-bold text-lg">Order #{order.id.slice(0, 8)}</h2>
+              <p className="text-sm text-muted-foreground">{order.customer_name} — {order.customer_phone}</p>
+              <p className="text-xs text-muted-foreground">{order.city} — {order.shipping_address}</p>
+            </div>
+            <button onClick={onClose} className="p-2 hover:bg-muted rounded-lg transition-colors">
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+
+          <div className="p-6 space-y-4">
+            <h3 className="font-semibold text-sm uppercase tracking-wider text-muted-foreground">Items Ordered</h3>
+            {(order.items || []).map((item: any, i: number) => (
+              <div key={i} className="bg-background border border-border rounded-lg p-4">
+                <div className="flex gap-4">
+                  {/* Product base image */}
+                  <div className="relative w-24 h-24 flex-shrink-0 rounded-md overflow-hidden bg-muted border border-border">
+                    {item.image ? (
+                      <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-2xl opacity-20">
+                        {item.name?.[0]}
+                      </div>
+                    )}
+                    {/* Custom design overlay */}
+                    {item.custom?.dataUrl && (
+                      <img
+                        src={item.custom.dataUrl}
+                        alt="Custom design"
+                        className="absolute inset-0 w-full h-full object-contain"
+                        style={{ mixBlendMode: 'multiply' }}
+                      />
+                    )}
+                  </div>
+
+                  <div className="flex-1 min-w-0">
+                    <p className="font-semibold">{item.name}</p>
+                    <p className="text-sm text-muted-foreground">
+                      Size: {item.size} • Color: {item.color} • Qty: {item.quantity}
+                    </p>
+                    <p className="text-sm font-medium mt-1">{item.price * item.quantity} EGP</p>
+
+                    {item.custom && (
+                      <div className="mt-2 p-2 bg-accent/5 border border-accent/20 rounded-md">
+                        <p className="text-xs font-semibold text-accent flex items-center gap-1">
+                          <Sparkles className="w-3 h-3" /> Custom Print
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                          Size: {item.custom.printSize} • Fee: +{item.custom.fee} EGP
+                        </p>
+                        {item.custom.dataUrl && (
+                          <img
+                            src={item.custom.dataUrl}
+                            alt="Design"
+                            className="mt-2 h-16 object-contain rounded border border-border bg-white"
+                          />
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+
+            <div className="border-t border-border pt-4 flex justify-between items-center">
+              <div className="text-sm text-muted-foreground">
+                Payment: <span className="font-medium text-foreground">{order.payment_method}</span>
+                {' • '}
+                <span className={order.payment_status === 'paid' ? 'text-green-500' : 'text-yellow-500'}>
+                  {order.payment_status}
+                </span>
+              </div>
+              <p className="font-bold text-lg">{order.total_price} EGP</p>
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+
 export function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
@@ -33,6 +130,7 @@ export function AdminPage() {
   const [saving, setSaving] = useState(false);
   const [saveMsg, setSaveMsg] = useState('');
   const [uploadingImages, setUploadingImages] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
   const { orders, loading: ordersLoading, updateOrderStatus } = useOrders();
   const { products, loading: productsLoading, addProduct, deleteProduct } = useProducts();
 
@@ -151,7 +249,6 @@ export function AdminPage() {
             ))}
           </div>
 
-          {/* Tabs */}
           <div className="flex gap-2 mb-8 border-b border-border">
             {[
               { key: 'orders', label: 'Orders', icon: Package },
@@ -164,10 +261,12 @@ export function AdminPage() {
             ))}
           </div>
 
-          {/* Orders Tab */}
           {activeTab === 'orders' && (
             <div className="bg-card rounded-sm border border-border overflow-hidden">
-              <div className="p-6 border-b border-border"><h3 className="uppercase tracking-wider">Orders</h3></div>
+              <div className="p-6 border-b border-border">
+                <h3 className="uppercase tracking-wider">Orders</h3>
+                <p className="text-xs text-muted-foreground mt-1">Click any row to view order details</p>
+              </div>
               {ordersLoading ? (
                 <div className="p-8 text-center text-muted-foreground">Loading...</div>
               ) : orders.length === 0 ? (
@@ -183,7 +282,11 @@ export function AdminPage() {
                     </thead>
                     <tbody>
                       {orders.map(order => (
-                        <tr key={order.id} className="border-b border-border hover:bg-muted/50">
+                        <tr
+                          key={order.id}
+                          className="border-b border-border hover:bg-muted/50 cursor-pointer"
+                          onClick={() => setSelectedOrder(order)}
+                        >
                           <td className="p-4 text-sm font-mono">{order.id.slice(0, 8)}...</td>
                           <td className="p-4">
                             <div>{order.customer_name}</div>
@@ -202,7 +305,7 @@ export function AdminPage() {
                               {order.payment_status}
                             </span>
                           </td>
-                          <td className="p-4">
+                          <td className="p-4" onClick={e => e.stopPropagation()}>
                             <Select value={order.status} onValueChange={val => updateOrderStatus(order.id, val as Order['status'])}>
                               <SelectTrigger className="w-32"><SelectValue /></SelectTrigger>
                               <SelectContent>
@@ -221,11 +324,8 @@ export function AdminPage() {
             </div>
           )}
 
-          {/* Products Tab */}
           {activeTab === 'products' && (
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-8">
-
-              {/* Add Product Form */}
               <div className="bg-card rounded-sm border border-border p-8 max-w-2xl">
                 <h3 className="uppercase tracking-wider mb-6 flex items-center gap-2"><Plus className="w-4 h-4" />Add New Product</h3>
                 <form onSubmit={handleAddProduct} className="space-y-5">
@@ -269,8 +369,6 @@ export function AdminPage() {
                     <Label>Colors <span className="text-muted-foreground text-xs">(Name:#hex)</span></Label>
                     <Input className="mt-1" value={form.colors} onChange={e => setForm({...form, colors: e.target.value})} placeholder="Black:#000000, White:#ffffff" />
                   </div>
-
-                  {/* Cloudinary Image Upload */}
                   <div>
                     <Label>Product Images</Label>
                     <div className="mt-1 space-y-3">
@@ -279,32 +377,21 @@ export function AdminPage() {
                         <span className="text-sm text-muted-foreground">
                           {uploadingImages ? 'Uploading...' : 'Click to upload images'}
                         </span>
-                        <input
-                          type="file"
-                          accept="image/*"
-                          multiple
-                          className="hidden"
-                          onChange={handleImageUpload}
-                          disabled={uploadingImages}
-                        />
+                        <input type="file" accept="image/*" multiple className="hidden" onChange={handleImageUpload} disabled={uploadingImages} />
                       </label>
                       {form.images && (
                         <div className="flex flex-wrap gap-2">
                           {form.images.split(',').filter(Boolean).map((url, i) => (
                             <div key={i} className="relative w-20 h-20 group">
                               <img src={url.trim()} alt="" className="w-full h-full object-cover rounded-sm" />
-                              <button
-                                type="button"
-                                onClick={() => removeImage(i)}
-                                className="absolute -top-1 -right-1 w-5 h-5 bg-destructive rounded-full text-white text-xs flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-                              >×</button>
+                              <button type="button" onClick={() => removeImage(i)}
+                                className="absolute -top-1 -right-1 w-5 h-5 bg-destructive rounded-full text-white text-xs flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">×</button>
                             </div>
                           ))}
                         </div>
                       )}
                     </div>
                   </div>
-
                   <div className="flex items-center gap-3">
                     <input type="checkbox" id="featured" checked={form.featured} onChange={e => setForm({...form, featured: e.target.checked})} className="w-4 h-4 accent-red-600" />
                     <Label htmlFor="featured">Featured on homepage</Label>
@@ -316,7 +403,6 @@ export function AdminPage() {
                 </form>
               </div>
 
-              {/* Products List */}
               <div className="bg-card rounded-sm border border-border overflow-hidden">
                 <div className="p-6 border-b border-border"><h3 className="uppercase tracking-wider">All Products ({products.length})</h3></div>
                 {productsLoading ? (
@@ -326,8 +412,8 @@ export function AdminPage() {
                     <table className="w-full">
                       <thead className="border-b border-border">
                         <tr className="text-left text-sm uppercase tracking-wider text-muted-foreground">
-                          <th className="p-4">Image</th><th className="p-4">Name</th><th className="p-4">Category</th><th className="p-4">Collection</th>
-                          <th className="p-4">Price</th><th className="p-4">Featured</th><th className="p-4">Delete</th>
+                          <th className="p-4">Image</th><th className="p-4">Name</th><th className="p-4">Category</th>
+                          <th className="p-4">Collection</th><th className="p-4">Price</th><th className="p-4">Featured</th><th className="p-4">Delete</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -363,6 +449,8 @@ export function AdminPage() {
           )}
         </motion.div>
       </div>
+
+      {selectedOrder && <OrderModal order={selectedOrder} onClose={() => setSelectedOrder(null)} />}
     </div>
   );
 }
