@@ -6,13 +6,7 @@ import { ProductCard } from '../components/ProductCard';
 import { useProducts } from '../../lib/useProducts';
 
 const collections = [
-  {
-    slug: 'uniform',
-    title: 'يونيفورم',
-    desc: 'شركات • مدارس • فرق',
-    image: 'https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=900&q=80&auto=format&fit=crop',
-  },
-  {
+    {
     slug: 'summer-2026',
     title: 'صيف 2026',
     desc: 'تيشيرتات • شورتات',
