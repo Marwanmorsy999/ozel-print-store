@@ -1,5 +1,5 @@
 import { useRef, useState, useCallback } from 'react';
-import { Upload, Trash2, RotateCcw, Sparkles, ImageIcon, ShoppingBag, Check } from 'lucide-react';
+import { Upload, Trash2, RotateCcw, Sparkles, ImageIcon, ShoppingBag, Check, ExternalLink } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from './ui/button';
 import { Slider } from './ui/slider';
@@ -12,14 +12,47 @@ interface CustomizePrintProps {
   onAddCustomized?: (custom: CustomPrint) => boolean | void;
 }
 
+function PinterestButton() {
+  return (
+    <a
+      href="https://www.pinterest.com"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group relative w-full flex items-center gap-4 overflow-hidden rounded-xl border border-[#E60023]/30 bg-gradient-to-l from-[#E60023]/10 via-background to-background hover:from-[#E60023]/20 hover:border-[#E60023]/60 transition-all duration-300 p-4"
+    >
+      {/* Pinterest P logo */}
+      <div className="relative flex-shrink-0 w-14 h-14 rounded-full bg-[#E60023] flex items-center justify-center shadow-lg shadow-[#E60023]/30 group-hover:scale-110 transition-transform duration-300">
+        <svg viewBox="0 0 24 24" className="w-8 h-8 fill-white">
+          <path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/>
+        </svg>
+      </div>
+
+      {/* Text content */}
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-2 mb-0.5">
+          <span className="font-bold text-base text-foreground">استلهم من Pinterest</span>
+          <ExternalLink className="w-3.5 h-3.5 text-muted-foreground group-hover:text-[#E60023] transition-colors" />
+        </div>
+        <p className="text-xs text-muted-foreground leading-snug">
+          دور على تصاميم وأفكار طباعة تعجبك — ثم ارفعها هنا
+        </p>
+      </div>
+
+      {/* Animated accent dots */}
+      <div className="absolute -top-3 -left-3 w-16 h-16 rounded-full bg-[#E60023]/5 group-hover:bg-[#E60023]/10 transition-colors" />
+      <div className="absolute -bottom-4 -left-1 w-10 h-10 rounded-full bg-[#E60023]/5 group-hover:bg-[#E60023]/10 transition-colors" />
+    </a>
+  );
+}
+
 export function CustomizePrint({ product, onAddCustomized }: CustomizePrintProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const draggingRef = useRef(false);
 
   const [design, setDesign] = useState<string | null>(null);
-  const [pos, setPos] = useState({ x: 50, y: 45 }); // percentage within preview
-  const [scale, setScale] = useState(35); // width as % of container
+  const [pos, setPos] = useState({ x: 50, y: 45 });
+  const [scale, setScale] = useState(35);
   const [rotation, setRotation] = useState(0);
   const [added, setAdded] = useState(false);
 
@@ -69,19 +102,10 @@ export function CustomizePrint({ product, onAddCustomized }: CustomizePrintProps
     if (!draggingRef.current) return;
     updatePosFromEvent(e.clientX, e.clientY);
   };
-  const onPointerUp = () => {
-    draggingRef.current = false;
-  };
+  const onPointerUp = () => { draggingRef.current = false; };
 
-  const reset = () => {
-    setPos({ x: 50, y: 45 });
-    setScale(35);
-    setRotation(0);
-  };
-  const removeDesign = () => {
-    setDesign(null);
-    if (fileInputRef.current) fileInputRef.current.value = '';
-  };
+  const reset = () => { setPos({ x: 50, y: 45 }); setScale(35); setRotation(0); };
+  const removeDesign = () => { setDesign(null); if (fileInputRef.current) fileInputRef.current.value = ''; };
 
   const handleAdd = () => {
     if (!design) return;
@@ -125,7 +149,6 @@ export function CustomizePrint({ product, onAddCustomized }: CustomizePrintProps
             </div>
           )}
 
-          {/* Suggested print area guide (only while designing) */}
           {design && (
             <div className="absolute inset-x-[22%] inset-y-[20%] border border-dashed border-white/30 rounded-md pointer-events-none" />
           )}
@@ -148,7 +171,6 @@ export function CustomizePrint({ product, onAddCustomized }: CustomizePrintProps
                 className="w-full h-auto drop-shadow-[0_6px_16px_rgba(0,0,0,0.45)]"
                 style={{ mixBlendMode: 'multiply' }}
               />
-              {/* selection ring to make placement obvious */}
               <span className="absolute -inset-2 border border-accent/60 rounded-md" />
             </div>
           )}
@@ -166,7 +188,7 @@ export function CustomizePrint({ product, onAddCustomized }: CustomizePrintProps
         </div>
 
         {/* Controls */}
-        <div className="space-y-6">
+        <div className="space-y-5">
           <input
             ref={fileInputRef}
             type="file"
@@ -193,17 +215,26 @@ export function CustomizePrint({ product, onAddCustomized }: CustomizePrintProps
             </div>
           </div>
 
+          {/* Pinterest inspiration button — always visible */}
+          <div className="space-y-2">
+            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">محتاج إلهام؟</p>
+            <PinterestButton />
+          </div>
+
+          {/* Upload / controls */}
           {!design ? (
             <button
               type="button"
               onClick={() => fileInputRef.current?.click()}
-              className="w-full border-2 border-dashed border-border hover:border-accent rounded-lg p-10 flex flex-col items-center justify-center gap-3 transition-colors"
+              className="w-full border-2 border-dashed border-border hover:border-accent rounded-xl p-8 flex flex-col items-center justify-center gap-3 transition-colors group"
             >
-              <div className="w-12 h-12 rounded-full bg-accent/10 border border-accent/30 flex items-center justify-center">
-                <Upload className="w-5 h-5 text-accent" />
+              <div className="w-14 h-14 rounded-full bg-accent/10 border border-accent/30 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                <Upload className="w-6 h-6 text-accent" />
               </div>
-              <span className="font-bold">ارفع تصميمك</span>
-              <span className="text-xs text-muted-foreground">PNG أو JPG — حتى 8 ميجا. يفضّل PNG بخلفية شفافة.</span>
+              <div className="text-center">
+                <p className="font-bold text-base mb-1">ارفع تصميمك</p>
+                <p className="text-xs text-muted-foreground">PNG أو JPG — حتى 8 ميجا. يفضّل PNG بخلفية شفافة.</p>
+              </div>
             </button>
           ) : (
             <>
@@ -236,7 +267,7 @@ export function CustomizePrint({ product, onAddCustomized }: CustomizePrintProps
               </div>
 
               <p className="text-xs text-muted-foreground">
-                تلميح: اسحب التصميم على القطعة عشان تظبط مكانه. اختار المقاس واللون فوق قبل الإضافة.
+                تلميح: اسحب التصميم على القطعة عشان تضبط مكانه. اختار المقاس واللون فوق قبل الإضافة.
               </p>
             </>
           )}
