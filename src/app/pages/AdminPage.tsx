@@ -100,10 +100,10 @@ function OrderModal({ order, onClose }: { order: Order; onClose: () => void }) {
                         </div>
                         
                           href={item.custom.dataUrl}
-                          download={`design-order-${order.id.slice(0, 8)}-item-${i + 1}.png`}
+                          download={['design-order', order.id.slice(0, 8), 'item', String(i + 1)].join('-') + '.png'}
                           className="inline-flex items-center gap-2 text-xs text-accent hover:underline font-medium"
                         >
-                          ⬇ Download design file
+                          Download design file
                         </a>
                       </div>
                     ) : (
