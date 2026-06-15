@@ -136,6 +136,7 @@ export function HomePage() {
                     <Link to="/shop"><Upload className="w-5 h-5" /> ابدأ التخصيص</Link>
                   </Button>
                   
+                  
                     href="https://www.pinterest.com"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -219,3 +220,4 @@ export function HomePage() {
     </div>
   );
 }
+

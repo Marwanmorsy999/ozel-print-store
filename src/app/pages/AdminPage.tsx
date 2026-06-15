@@ -94,17 +94,12 @@ function OrderModal({ order, onClose }: { order: Order; onClose: () => void }) {
                           />
                         </div>
                         <a
-                          <button
-                          onClick={() => {
-                            const link = document.createElement('a');
-                            link.href = item.custom.design;
-                            link.download = ['design', order.id.slice(0, 8), 'item' + String(i + 1)].join('-') + '.png';
-                            link.click();
-                          }}
+                          href={item.custom.design}
+                          download={['design', order.id.slice(0, 8), 'item' + String(i + 1)].join('-') + '.png'}
                           className="inline-flex items-center gap-2 text-xs text-accent hover:underline font-medium"
                         >
                           Download design file
-                        </button>
+                        </a>
                       </div>
                     ) : (
                       <p className="text-xs text-muted-foreground italic">No design file saved</p>
