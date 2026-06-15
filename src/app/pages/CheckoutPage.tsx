@@ -38,6 +38,57 @@ export function CheckoutPage() {
     firstName: '', lastName: '', email: '', phone: '', address: '', city: '', postal: '',
   });
 
+  const setField = (field: keyof FormState, value: string) => {
+    setForm(prev => ({ ...prev, [field]: value }));
+    setErrors(prev => ({ ...prev, [field]: undefined }));
+  };
+
+  const validate = () => {
+    const newErrors: Partial<Record<keyof FormState, string>> = {};
+    if (!form.firstName.trim()) newErrors.firstName = 'مطلوب';
+    if (!form.lastName.trim()) newErrors.lastName = 'مطلوب';
+    if (!form.email.trim()) newErrors.email = 'مطلوب';
+    if (!form.phone.trim()) newErrors.phone = 'مطلوب';
+    if (!form.address.trim()) newErrors.address = 'مطلوب';
+    if (!form.city.trim()) newErrors.city = 'مطلوب';
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const setField = (field: keyof FormState, value: string) => {
+    setForm(prev => ({ ...prev, [field]: value }));
+    setErrors(prev => ({ ...prev, [field]: undefined }));
+  };
+
+  const validate = () => {
+    const newErrors: Partial<Record<keyof FormState, string>> = {};
+    if (!form.firstName.trim()) newErrors.firstName = 'مطلوب';
+    if (!form.lastName.trim()) newErrors.lastName = 'مطلوب';
+    if (!form.email.trim()) newErrors.email = 'مطلوب';
+    if (!form.phone.trim()) newErrors.phone = 'مطلوب';
+    if (!form.address.trim()) newErrors.address = 'مطلوب';
+    if (!form.city.trim()) newErrors.city = 'مطلوب';
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const setField = (field: keyof FormState, value: string) => {
+    setForm(prev => ({ ...prev, [field]: value }));
+    setErrors(prev => ({ ...prev, [field]: undefined }));
+  };
+
+  const validate = () => {
+    const newErrors: Partial<Record<keyof FormState, string>> = {};
+    if (!form.firstName.trim()) newErrors.firstName = 'مطلوب';
+    if (!form.lastName.trim()) newErrors.lastName = 'مطلوب';
+    if (!form.email.trim()) newErrors.email = 'مطلوب';
+    if (!form.phone.trim()) newErrors.phone = 'مطلوب';
+    if (!form.address.trim()) newErrors.address = 'مطلوب';
+    if (!form.city.trim()) newErrors.city = 'مطلوب';
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) {
