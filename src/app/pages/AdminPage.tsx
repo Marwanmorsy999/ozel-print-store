@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Package, DollarSign, Lock, CheckCircle, Printer, Box, Truck, ShoppingBag, Plus, Trash2, Upload, X, Sparkles } from 'lucide-react';
 import { Button } from '../components/ui/button';
@@ -83,18 +83,18 @@ function OrderModal({ order, onClose }: { order: Order; onClose: () => void }) {
                       <p>Position: X={Math.round(item.custom.x)}px Y={Math.round(item.custom.y)}px</p>
                       <p>Print fee: <span className="text-accent font-bold">+{item.custom.fee} EGP</span></p>
                     </div>
-                    {item.custom.dataUrl ? (
+                    {item.custom.design ? (
                       <div className="space-y-2">
                         <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Design File</p>
                         <div className="bg-white rounded-lg p-4 flex items-center justify-center border border-border">
                           <img
-                            src={item.custom.dataUrl}
+                            src={item.custom.design}
                             alt="Customer design"
                             className="max-h-64 max-w-full object-contain"
                           />
                         </div>
                         <a
-                          href={item.custom.dataUrl}
+                          href={item.custom.design}
                           download={['design', order.id.slice(0, 8), 'item' + String(i + 1)].join('-') + '.png'}
                           className="inline-flex items-center gap-2 text-xs text-accent hover:underline font-medium"
                         >
@@ -459,3 +459,4 @@ export function AdminPage() {
     </div>
   );
 }
+
