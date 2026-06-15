@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback } from 'react';
+﻿import { useRef, useState, useCallback } from 'react';
 import { Upload, Trash2, RotateCcw, Sparkles, ImageIcon, ShoppingBag, Check, ExternalLink } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from './ui/button';
@@ -30,11 +30,11 @@ function PinterestButton() {
       {/* Text content */}
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 mb-0.5">
-          <span className="font-bold text-base text-foreground">استلهم من Pinterest</span>
+          <span className="font-bold text-base text-foreground">ط§ط³طھظ„ظ‡ظ… ظ…ظ† Pinterest</span>
           <ExternalLink className="w-3.5 h-3.5 text-muted-foreground group-hover:text-[#E60023] transition-colors" />
         </div>
         <p className="text-xs text-muted-foreground leading-snug">
-          دور على تصاميم وأفكار طباعة تعجبك — ثم ارفعها هنا
+          ط¯ظˆط± ط¹ظ„ظ‰ طھطµط§ظ…ظٹظ… ظˆط£ظپظƒط§ط± ط·ط¨ط§ط¹ط© طھط¹ط¬ط¨ظƒ â€” ط«ظ… ط§ط±ظپط¹ظ‡ط§ ظ‡ظ†ط§
         </p>
       </div>
 
@@ -62,11 +62,11 @@ export function CustomizePrint({ product, onAddCustomized }: CustomizePrintProps
   const handleFile = useCallback((file: File | undefined) => {
     if (!file) return;
     if (!file.type.startsWith('image/')) {
-      toast.error('من فضلك ارفع صورة (PNG أو JPG)');
+      toast.error('ظ…ظ† ظپط¶ظ„ظƒ ط§ط±ظپط¹ طµظˆط±ط© (PNG ط£ظˆ JPG)');
       return;
     }
     if (file.size > 8 * 1024 * 1024) {
-      toast.error('حجم الصورة كبير. أقصى حجم 8 ميجا.');
+      toast.error('ط­ط¬ظ… ط§ظ„طµظˆط±ط© ظƒط¨ظٹط±. ط£ظ‚طµظ‰ ط­ط¬ظ… 8 ظ…ظٹط¬ط§.');
       return;
     }
     const reader = new FileReader();
@@ -75,7 +75,7 @@ export function CustomizePrint({ product, onAddCustomized }: CustomizePrintProps
       setPos({ x: 50, y: 45 });
       setScale(35);
       setRotation(0);
-      toast.success('تم رفع التصميم! حركه وكبّره على القطعة.');
+      toast.success('طھظ… ط±ظپط¹ ط§ظ„طھطµظ…ظٹظ…! ط­ط±ظƒظ‡ ظˆظƒط¨ظ‘ط±ظ‡ ط¹ظ„ظ‰ ط§ظ„ظ‚ط·ط¹ط©.');
     };
     reader.readAsDataURL(file);
   }, []);
@@ -119,14 +119,14 @@ export function CustomizePrint({ product, onAddCustomized }: CustomizePrintProps
     <section className="mt-16 border-t border-border pt-12">
       <div className="flex items-center gap-2 mb-2">
         <Sparkles className="w-5 h-5 text-accent" />
-        <p className="eyebrow text-accent">خصّص طباعتك</p>
+        <p className="eyebrow text-accent">ط®طµظ‘طµ ط·ط¨ط§ط¹طھظƒ</p>
       </div>
       <h2 className="font-bold mb-2" style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)' }}>
-        ارفع تصميمك وشوف المعاينة
+        ط§ط±ظپط¹ طھطµظ…ظٹظ…ظƒ ظˆط´ظˆظپ ط§ظ„ظ…ط¹ط§ظٹظ†ط©
       </h2>
       <p className="text-muted-foreground mb-8 max-w-2xl">
-        ارفع اللوجو أو التصميم بتاعك، حركه بإصبعك أو بالماوس على القطعة، وكبّره أو لفّه.
-        المعاينة دي بتوريك شكل الطباعة قبل ما تطلب.
+        ط§ط±ظپط¹ ط§ظ„ظ„ظˆط¬ظˆ ط£ظˆ ط§ظ„طھطµظ…ظٹظ… ط¨طھط§ط¹ظƒطŒ ط­ط±ظƒظ‡ ط¨ط¥طµط¨ط¹ظƒ ط£ظˆ ط¨ط§ظ„ظ…ط§ظˆط³ ط¹ظ„ظ‰ ط§ظ„ظ‚ط·ط¹ط©طŒ ظˆظƒط¨ظ‘ط±ظ‡ ط£ظˆ ظ„ظپظ‘ظ‡.
+        ط§ظ„ظ…ط¹ط§ظٹظ†ط© ط¯ظٹ ط¨طھظˆط±ظٹظƒ ط´ظƒظ„ ط§ظ„ط·ط¨ط§ط¹ط© ظ‚ط¨ظ„ ظ…ط§ طھط·ظ„ط¨.
       </p>
 
       <div className="grid lg:grid-cols-2 gap-8">
@@ -166,7 +166,7 @@ export function CustomizePrint({ product, onAddCustomized }: CustomizePrintProps
             >
               <img
                 src={design}
-                alt="تصميمك"
+                alt="طھطµظ…ظٹظ…ظƒ"
                 draggable={false}
                 className="w-full h-auto drop-shadow-[0_6px_16px_rgba(0,0,0,0.45)]"
                 style={{ mixBlendMode: 'multiply' }}
@@ -178,12 +178,12 @@ export function CustomizePrint({ product, onAddCustomized }: CustomizePrintProps
           {!design && (
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-background/55 backdrop-blur-[1px]">
               <ImageIcon className="w-10 h-10 text-muted-foreground" />
-              <p className="text-sm text-muted-foreground">ارفع تصميمك عشان تشوف المعاينة</p>
+              <p className="text-sm text-muted-foreground">ط§ط±ظپط¹ طھطµظ…ظٹظ…ظƒ ط¹ط´ط§ظ† طھط´ظˆظپ ط§ظ„ظ…ط¹ط§ظٹظ†ط©</p>
             </div>
           )}
 
           <span className="absolute top-3 start-3 text-[10px] eyebrow bg-background/70 text-muted-foreground px-2 py-1 rounded">
-            معاينة حية
+            ظ…ط¹ط§ظٹظ†ط© ط­ظٹط©
           </span>
         </div>
 
@@ -200,24 +200,24 @@ export function CustomizePrint({ product, onAddCustomized }: CustomizePrintProps
           {/* Price breakdown */}
           <div className="rounded-lg border border-border bg-card p-4 space-y-2 text-sm">
             <div className="flex justify-between">
-              <span className="text-muted-foreground">سعر القطعة</span>
-              <span>{product.price} جنيه</span>
+              <span className="text-muted-foreground">ط³ط¹ط± ط§ظ„ظ‚ط·ط¹ط©</span>
+              <span>{product.price} ط¬ظ†ظٹظ‡</span>
             </div>
             <div className="flex justify-between">
               <span className="text-muted-foreground flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-accent" /> رسوم الطباعة المخصصة
+                <Sparkles className="w-3.5 h-3.5 text-accent" /> ط±ط³ظˆظ… ط§ظ„ط·ط¨ط§ط¹ط© ط§ظ„ظ…ط®طµطµط©
               </span>
-              <span className="text-accent font-semibold">+{CUSTOM_PRINT_FEE} جنيه</span>
+              <span className="text-accent font-semibold">+{CUSTOM_PRINT_FEE} ط¬ظ†ظٹظ‡</span>
             </div>
             <div className="border-t border-border pt-2 flex justify-between font-bold text-base">
-              <span>الإجمالي للقطعة</span>
-              <span className="font-display">{totalPrice} جنيه</span>
+              <span>ط§ظ„ط¥ط¬ظ…ط§ظ„ظٹ ظ„ظ„ظ‚ط·ط¹ط©</span>
+              <span className="font-display">{totalPrice} ط¬ظ†ظٹظ‡</span>
             </div>
           </div>
 
-          {/* Pinterest inspiration button — always visible */}
+          {/* Pinterest inspiration button â€” always visible */}
           <div className="space-y-2">
-            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">محتاج إلهام؟</p>
+            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">ظ…ط­طھط§ط¬ ط¥ظ„ظ‡ط§ظ…طں</p>
             <PinterestButton />
           </div>
 
@@ -232,27 +232,27 @@ export function CustomizePrint({ product, onAddCustomized }: CustomizePrintProps
                 <Upload className="w-6 h-6 text-accent" />
               </div>
               <div className="text-center">
-                <p className="font-bold text-base mb-1">ارفع تصميمك</p>
-                <p className="text-xs text-muted-foreground">PNG أو JPG — حتى 8 ميجا. يفضّل PNG بخلفية شفافة.</p>
+                <p className="font-bold text-base mb-1">ط§ط±ظپط¹ طھطµظ…ظٹظ…ظƒ</p>
+                <p className="text-xs text-muted-foreground">PNG ط£ظˆ JPG â€” ط­طھظ‰ 8 ظ…ظٹط¬ط§. ظٹظپط¶ظ‘ظ„ PNG ط¨ط®ظ„ظپظٹط© ط´ظپط§ظپط©.</p>
               </div>
             </button>
           ) : (
             <>
               <div className="flex gap-3">
                 <Button variant="outline" className="flex-1" onClick={() => fileInputRef.current?.click()}>
-                  <Upload className="w-4 h-4" /> غيّر التصميم
+                  <Upload className="w-4 h-4" /> ط؛ظٹظ‘ط± ط§ظ„طھطµظ…ظٹظ…
                 </Button>
-                <Button variant="outline" onClick={reset} aria-label="إعادة الضبط">
+                <Button variant="outline" onClick={reset} aria-label="ط¥ط¹ط§ط¯ط© ط§ظ„ط¶ط¨ط·">
                   <RotateCcw className="w-4 h-4" />
                 </Button>
-                <Button variant="outline" onClick={removeDesign} aria-label="حذف التصميم">
+                <Button variant="outline" onClick={removeDesign} aria-label="ط­ط°ظپ ط§ظ„طھطµظ…ظٹظ…">
                   <Trash2 className="w-4 h-4" />
                 </Button>
               </div>
 
               <div>
                 <div className="flex justify-between text-sm mb-2">
-                  <label className="font-semibold">الحجم</label>
+                  <label className="font-semibold">ط§ظ„ط­ط¬ظ…</label>
                   <span className="text-muted-foreground">{scale}%</span>
                 </div>
                 <Slider value={[scale]} onValueChange={([v]) => setScale(v)} min={10} max={80} step={1} />
@@ -260,14 +260,14 @@ export function CustomizePrint({ product, onAddCustomized }: CustomizePrintProps
 
               <div>
                 <div className="flex justify-between text-sm mb-2">
-                  <label className="font-semibold">الدوران</label>
-                  <span className="text-muted-foreground">{rotation}°</span>
+                  <label className="font-semibold">ط§ظ„ط¯ظˆط±ط§ظ†</label>
+                  <span className="text-muted-foreground">{rotation}آ°</span>
                 </div>
                 <Slider value={[rotation]} onValueChange={([v]) => setRotation(v)} min={-180} max={180} step={1} />
               </div>
 
               <p className="text-xs text-muted-foreground">
-                تلميح: اسحب التصميم على القطعة عشان تضبط مكانه. اختار المقاس واللون فوق قبل الإضافة.
+                طھظ„ظ…ظٹط­: ط§ط³ط­ط¨ ط§ظ„طھطµظ…ظٹظ… ط¹ظ„ظ‰ ط§ظ„ظ‚ط·ط¹ط© ط¹ط´ط§ظ† طھط¶ط¨ط· ظ…ظƒط§ظ†ظ‡. ط§ط®طھط§ط± ط§ظ„ظ…ظ‚ط§ط³ ظˆط§ظ„ظ„ظˆظ† ظپظˆظ‚ ظ‚ط¨ظ„ ط§ظ„ط¥ط¶ط§ظپط©.
               </p>
             </>
           )}
@@ -279,9 +279,9 @@ export function CustomizePrint({ product, onAddCustomized }: CustomizePrintProps
             className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-bold h-12 disabled:opacity-50"
           >
             {added ? (
-              <><Check className="w-5 h-5" /> اتضافت للعربية</>
+              <><Check className="w-5 h-5" /> ط§طھط¶ط§ظپطھ ظ„ظ„ط¹ط±ط¨ظٹط©</>
             ) : (
-              <><ShoppingBag className="w-5 h-5" /> ضيف للعربية مع الطباعة — {totalPrice} جنيه</>
+              <><ShoppingBag className="w-5 h-5" /> ط¶ظٹظپ ظ„ظ„ط¹ط±ط¨ظٹط© ظ…ط¹ ط§ظ„ط·ط¨ط§ط¹ط© â€” {totalPrice} ط¬ظ†ظٹظ‡</>
             )}
           </Button>
         </div>
@@ -289,3 +289,4 @@ export function CustomizePrint({ product, onAddCustomized }: CustomizePrintProps
     </section>
   );
 }
+

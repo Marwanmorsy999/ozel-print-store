@@ -1,4 +1,4 @@
-import { Link } from 'react-router';
+﻿import { Link } from 'react-router';
 import { motion } from 'motion/react';
 import { ArrowLeft, Printer, ShoppingBag, Upload, Sparkles, BadgeCheck, Truck } from 'lucide-react';
 import { Button } from '../components/ui/button';
@@ -8,8 +8,8 @@ import { useProducts } from '../../lib/useProducts';
 const collections = [
   {
     slug: 'summer-2026',
-    title: 'صيف 2026',
-    desc: 'تيشيرتات • شورتات',
+    title: 'طµظٹظپ 2026',
+    desc: 'طھظٹط´ظٹط±طھط§طھ â€¢ ط´ظˆط±طھط§طھ',
     image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=900&q=80&auto=format&fit=crop',
   },
 ];
@@ -45,33 +45,33 @@ export function HomePage() {
             className="mb-8 inline-flex items-center gap-2 px-4 py-2 bg-accent/10 border border-accent/30 rounded-full"
           >
             <Printer className="w-4 h-4 text-accent" />
-            <span className="eyebrow text-accent">مصنع طباعة وتطريز مخصص — مصر</span>
+            <span className="eyebrow text-accent">ظ…طµظ†ط¹ ط·ط¨ط§ط¹ط© ظˆطھط·ط±ظٹط² ظ…ط®طµطµ â€” ظ…طµط±</span>
           </motion.div>
 
           <h1
             className="mb-6 font-extrabold"
             style={{ fontSize: 'clamp(2.5rem, 9vw, 5.5rem)', lineHeight: 1.05 }}
           >
-            اختار قطعتك
+            ط§ط®طھط§ط± ظ‚ط·ط¹طھظƒ
             <br />
-            وضيف <span className="text-gradient-premium">طباعتك</span>
+            ظˆط¶ظٹظپ <span className="text-gradient-premium">ط·ط¨ط§ط¹طھظƒ</span>
           </h1>
 
           <p className="text-base md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
-            طباعة وتطريز مخصص ويونيفورم مباشرة من المصنع. اختار أي قطعة فاضية، ارفع تصميمك، وشوف
-            المعاينة قبل ما تطلب. أي كمية من قطعة لـ 1000+.
+            ط·ط¨ط§ط¹ط© ظˆطھط·ط±ظٹط² ظ…ط®طµطµ ظˆظٹظˆظ†ظٹظپظˆط±ظ… ظ…ط¨ط§ط´ط±ط© ظ…ظ† ط§ظ„ظ…طµظ†ط¹. ط§ط®طھط§ط± ط£ظٹ ظ‚ط·ط¹ط© ظپط§ط¶ظٹط©طŒ ط§ط±ظپط¹ طھطµظ…ظٹظ…ظƒطŒ ظˆط´ظˆظپ
+            ط§ظ„ظ…ط¹ط§ظٹظ†ط© ظ‚ط¨ظ„ ظ…ط§ طھط·ظ„ط¨. ط£ظٹ ظƒظ…ظٹط© ظ…ظ† ظ‚ط·ط¹ط© ظ„ظ€ 1000+.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground font-bold tracking-wide h-12 px-8">
               <Link to="/shop">
                 <ShoppingBag className="w-5 h-5" />
-                اختار قطعة فاضية
+                ط§ط®طھط§ط± ظ‚ط·ط¹ط© ظپط§ط¶ظٹط©
               </Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="font-bold tracking-wide h-12 px-8 border-foreground/20 hover:border-gold hover:text-gold">
               <a href="https://wa.me/201044892192" target="_blank" rel="noopener noreferrer">
-                سعر أوردر جملة
+                ط³ط¹ط± ط£ظˆط±ط¯ط± ط¬ظ…ظ„ط©
               </a>
             </Button>
           </div>
@@ -85,11 +85,11 @@ export function HomePage() {
         <div className="container mx-auto">
           <div className="flex items-end justify-between mb-10 md:mb-14 gap-4">
             <div>
-              <p className="eyebrow text-gold mb-2">الكولكشنات</p>
-              <h2 className="font-bold" style={{ fontSize: 'clamp(1.75rem, 5vw, 2.75rem)' }}>اختار من الكتالوج</h2>
+              <p className="eyebrow text-gold mb-2">ط§ظ„ظƒظˆظ„ظƒط´ظ†ط§طھ</p>
+              <h2 className="font-bold" style={{ fontSize: 'clamp(1.75rem, 5vw, 2.75rem)' }}>ط§ط®طھط§ط± ظ…ظ† ط§ظ„ظƒطھط§ظ„ظˆط¬</h2>
             </div>
             <Button asChild variant="ghost" className="hidden sm:inline-flex text-muted-foreground hover:text-foreground">
-              <Link to="/shop">كل القطع <ArrowLeft className="w-4 h-4" /></Link>
+              <Link to="/shop">ظƒظ„ ط§ظ„ظ‚ط·ط¹ <ArrowLeft className="w-4 h-4" /></Link>
             </Button>
           </div>
 
@@ -109,7 +109,7 @@ export function HomePage() {
                     <p className="text-sm text-gold mb-1">{c.desc}</p>
                     <h3 className="font-bold text-2xl mb-3">{c.title}</h3>
                     <span className="inline-flex items-center gap-2 text-sm font-bold tracking-wide text-foreground group-hover:text-accent transition-colors">
-                      تسوق الآن <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+                      طھط³ظˆظ‚ ط§ظ„ط¢ظ† <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
                     </span>
                   </div>
                 </Link>
@@ -128,19 +128,19 @@ export function HomePage() {
             <div className="relative grid md:grid-cols-2 gap-8 items-center">
               <div>
                 <p className="eyebrow text-accent mb-3 inline-flex items-center gap-2">
-                  <Sparkles className="w-4 h-4" /> خصّص طباعتك
+                  <Sparkles className="w-4 h-4" /> ط®طµظ‘طµ ط·ط¨ط§ط¹طھظƒ
                 </p>
                 <h2 className="font-bold mb-4" style={{ fontSize: 'clamp(1.75rem, 5vw, 2.5rem)' }}>
-                  ارفع تصميمك وشوف المعاينة لحظياً
+                  ط§ط±ظپط¹ طھطµظ…ظٹظ…ظƒ ظˆط´ظˆظپ ط§ظ„ظ…ط¹ط§ظٹظ†ط© ظ„ط­ط¸ظٹط§ظ‹
                 </h2>
                 <p className="text-muted-foreground mb-6 leading-relaxed">
-                  اختار أي قطعة، ارفع اللوجو أو التصميم بتاعك، وحركه وكبّره على القطعة قبل ما تطلب.
-                  معاينة فورية تريك شكل الطباعة النهائي.
+                  ط§ط®طھط§ط± ط£ظٹ ظ‚ط·ط¹ط©طŒ ط§ط±ظپط¹ ط§ظ„ظ„ظˆط¬ظˆ ط£ظˆ ط§ظ„طھطµظ…ظٹظ… ط¨طھط§ط¹ظƒطŒ ظˆط­ط±ظƒظ‡ ظˆظƒط¨ظ‘ط±ظ‡ ط¹ظ„ظ‰ ط§ظ„ظ‚ط·ط¹ط© ظ‚ط¨ظ„ ظ…ط§ طھط·ظ„ط¨.
+                  ظ…ط¹ط§ظٹظ†ط© ظپظˆط±ظٹط© طھط±ظٹظƒ ط´ظƒظ„ ط§ظ„ط·ط¨ط§ط¹ط© ط§ظ„ظ†ظ‡ط§ط¦ظٹ.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground font-bold h-12 px-8">
                     <Link to="/shop">
-                      <Upload className="w-5 h-5" /> ابدأ التخصيص
+                      <Upload className="w-5 h-5" /> ط§ط¨ط¯ط£ ط§ظ„طھط®طµظٹطµ
                     </Link>
                   </Button>
                   <a
@@ -150,13 +150,13 @@ export function HomePage() {
                     className="group inline-flex items-center gap-3 h-12 px-6 rounded-lg border border-[#E60023]/40 bg-[#E60023]/10 hover:bg-[#E60023]/20 hover:border-[#E60023]/70 transition-all font-bold text-sm"
                   >
                     <PinterestIcon />
-                    استلهم من Pinterest
+                    ط§ط³طھظ„ظ‡ظ… ظ…ظ† Pinterest
                   </a>
                 </div>
               </div>
               <div className="flex justify-center">
                 <div className="relative w-56 h-64 sm:w-64 sm:h-72 rounded-xl bg-background border border-border flex items-center justify-center">
-                  <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&q=80&auto=format&fit=crop" alt="معاينة" className="absolute inset-0 w-full h-full object-cover rounded-xl opacity-90" />
+                  <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&q=80&auto=format&fit=crop" alt="ظ…ط¹ط§ظٹظ†ط©" className="absolute inset-0 w-full h-full object-cover rounded-xl opacity-90" />
                   <div className="relative z-10 px-4 py-2 bg-accent text-accent-foreground font-display font-bold tracking-widest rounded shadow-lg rotate-[-6deg]">
                     YOUR PRINT
                   </div>
@@ -171,8 +171,8 @@ export function HomePage() {
       <section className="py-20 md:py-28 px-4">
         <div className="container mx-auto">
           <div className="text-center mb-12">
-            <p className="eyebrow text-gold mb-2">القطع الفاضية المتاحة</p>
-            <h2 className="font-bold" style={{ fontSize: 'clamp(1.75rem, 5vw, 2.75rem)' }}>الأكثر طلباً</h2>
+            <p className="eyebrow text-gold mb-2">ط§ظ„ظ‚ط·ط¹ ط§ظ„ظپط§ط¶ظٹط© ط§ظ„ظ…طھط§ط­ط©</p>
+            <h2 className="font-bold" style={{ fontSize: 'clamp(1.75rem, 5vw, 2.75rem)' }}>ط§ظ„ط£ظƒط«ط± ط·ظ„ط¨ط§ظ‹</h2>
           </div>
 
           {loading ? (
@@ -191,7 +191,7 @@ export function HomePage() {
 
           <div className="text-center mt-12">
             <Button asChild variant="outline" size="lg" className="font-bold tracking-wide h-12 px-8 hover:border-gold hover:text-gold">
-              <Link to="/shop">شوف كل القطع <ArrowLeft className="w-4 h-4" /></Link>
+              <Link to="/shop">ط´ظˆظپ ظƒظ„ ط§ظ„ظ‚ط·ط¹ <ArrowLeft className="w-4 h-4" /></Link>
             </Button>
           </div>
         </div>
@@ -201,9 +201,9 @@ export function HomePage() {
       <section className="py-16 px-4 border-t border-border bg-card">
         <div className="container mx-auto grid grid-cols-1 sm:grid-cols-3 gap-10">
           {[
-            { icon: ShoppingBag, title: 'أي كمية', desc: 'من قطعة واحدة لـ 1000+. من غير حد أدنى.' },
-            { icon: BadgeCheck, title: 'أسعار المصنع', desc: 'مباشرة من المنتج. من غير هامش وسيط.' },
-            { icon: Truck, title: 'تسليم سريع', desc: 'طباعة بجودة عالية وتسليم في الموعد.' },
+            { icon: ShoppingBag, title: 'ط£ظٹ ظƒظ…ظٹط©', desc: 'ظ…ظ† ظ‚ط·ط¹ط© ظˆط§ط­ط¯ط© ظ„ظ€ 1000+. ظ…ظ† ط؛ظٹط± ط­ط¯ ط£ط¯ظ†ظ‰.' },
+            { icon: BadgeCheck, title: 'ط£ط³ط¹ط§ط± ط§ظ„ظ…طµظ†ط¹', desc: 'ظ…ط¨ط§ط´ط±ط© ظ…ظ† ط§ظ„ظ…ظ†طھط¬. ظ…ظ† ط؛ظٹط± ظ‡ط§ظ…ط´ ظˆط³ظٹط·.' },
+            { icon: Truck, title: 'طھط³ظ„ظٹظ… ط³ط±ظٹط¹', desc: 'ط·ط¨ط§ط¹ط© ط¨ط¬ظˆط¯ط© ط¹ط§ظ„ظٹط© ظˆطھط³ظ„ظٹظ… ظپظٹ ط§ظ„ظ…ظˆط¹ط¯.' },
           ].map((item, index) => (
             <motion.div
               key={item.title}
@@ -225,3 +225,4 @@ export function HomePage() {
     </div>
   );
 }
+
