@@ -5,7 +5,7 @@ import { ImageWithFallback } from './figma/ImageWithFallback';
 import type { Product } from '../../lib/useProducts';
 
 const collectionLabels: Record<string, string> = {
-  uniform: 'يونيفورم',
+  
   'summer-2026': 'صيف 2026',
   'winter-2026': 'شتا 2026',
 };

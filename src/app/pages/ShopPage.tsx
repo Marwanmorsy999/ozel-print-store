@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '../components/ui/sheet';
 
 const collectionTitles: Record<string, string> = {
-  uniform: 'يونيفورم',
+  
   'summer-2026': 'صيف 2026',
   'winter-2026': 'شتا 2026',
 };
@@ -133,7 +133,7 @@ export function ShopPage() {
               <h3 className="mb-4 text-sm">الكولكشنات</h3>
               <ul className="space-y-2 text-sm">
                 <li><Link to="/shop" className="text-muted-foreground hover:text-foreground transition-colors">كل المنتجات</Link></li>
-                <li><Link to="/shop/uniform" className="text-muted-foreground hover:text-foreground transition-colors">يونيفورم</Link></li>
+                
                 <li><Link to="/shop/summer-2026" className="text-muted-foreground hover:text-foreground transition-colors">صيف 2026</Link></li>
               </ul>
             </div>

@@ -10,7 +10,6 @@ import logoImage from '../../imports/WhatsApp_Image_2026-06-03_at_1.33.15_PM.jpe
 const links = [
   { to: '/', label: 'الرئيسية', end: true },
   { to: '/shop', label: 'المتجر' },
-  { to: '/shop/uniform', label: 'يونيفورم' },
   { to: '/shop/summer-2026', label: 'صيف 2026' },
   { to: '/contact', label: 'تواصل' },
 ];

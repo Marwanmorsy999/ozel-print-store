@@ -21,7 +21,7 @@ export function Footer() {
             <h4 className="font-bold tracking-wide mb-4 text-sm">المتجر</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><Link to="/shop" className="hover:text-foreground transition-colors">كل المنتجات</Link></li>
-              <li><Link to="/shop/uniform" className="hover:text-foreground transition-colors">يونيفورم</Link></li>
+            
               <li><Link to="/shop/summer-2026" className="hover:text-foreground transition-colors">صيف 2026</Link></li>
             </ul>
           </div>

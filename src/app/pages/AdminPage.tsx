@@ -354,7 +354,7 @@ export function AdminPage() {
                       <Select value={form.collection} onValueChange={val => setForm({...form, collection: val})}>
                         <SelectTrigger className="mt-1"><SelectValue /></SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="uniform">Uniform</SelectItem>
+                          
                           <SelectItem value="summer-2026">Summer 2026</SelectItem>
                           <SelectItem value="winter-2026">Winter 2026</SelectItem>
                           <SelectItem value="feedback">Feedback</SelectItem>
