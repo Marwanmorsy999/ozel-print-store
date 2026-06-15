@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { motion } from 'motion/react';
-import { CreditCard, Banknote, Wallet } from 'lucide-react';
+import { CreditCard, Banknote, Wallet, Sparkles, Loader2, CheckCircle2, ShoppingBag } from 'lucide-react';
+import { Link } from 'react-router';
 import { useCart } from '../context/CartContext';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
