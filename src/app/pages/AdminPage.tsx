@@ -50,6 +50,113 @@ function OrderModal({ order, onClose }: { order: Order; onClose: () => void }) {
             </button>
           </div>
 
+          <div className="p-6 space-y-6">
+            <h3 className="font-semibold text-sm uppercase tracking-wider text-muted-foreground">Items Ordered</h3>
+            {(order.items || []).map((item: any, i: number) => (
+              <div key={i} className="bg-background border border-border rounded-lg p-4 space-y-4">
+                {/* Product info row */}
+                <div className="flex gap-4">
+                  <div className="w-20 h-20 flex-shrink-0 rounded-md overflow-hidden bg-muted border border-border">
+                    {item.image ? (
+                      <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-2xl opacity-20">
+                        {item.name?.[0]}
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-semibold">{item.name}</p>
+                    <p className="text-sm text-muted-foreground">
+                      Size: {item.size} • Color: {item.color} • Qty: {item.quantity}
+                    </p>
+                    <p className="text-sm font-medium mt-1">{item.price * item.quantity} EGP</p>
+                  </div>
+                </div>
+
+                {/* Custom print section */}
+                {item.custom && (
+                  <div className="border border-accent/30 rounded-lg p-4 bg-accent/5 space-y-3">
+                    <p className="text-sm font-bold text-accent flex items-center gap-2">
+                      <Sparkles className="w-4 h-4" /> Custom Print Details
+                    </p>
+                    <div className="text-xs text-muted-foreground space-y-1">
+                      <p>Print size: <span className="text-foreground font-medium">{item.custom.printSize || item.custom.scale + '%'}</span></p>
+                      <p>Position: X={Math.round(item.custom.x)}px Y={Math.round(item.custom.y)}px</p>
+                      <p>Print fee: <span className="text-accent font-bold">+{item.custom.fee} EGP</span></p>
+                    </div>
+
+                    {/* Design file — large and clear for printing */}
+                    {item.custom.dataUrl ? (
+                      <div className="space-y-2">
+                        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Design File</p>
+                        <div className="bg-white rounded-lg p-4 flex items-center justify-center border border-border">
+                          <img
+                            src={item.custom.dataUrl}
+                            alt="Customer design"
+                            className="max-h-64 max-w-full object-contain"
+                            style={{ imageRendering: 'pixelated' }}
+                          />
+                        </div>
+                        
+                          href={item.custom.dataUrl}
+                          download={`design-order-${order.id.slice(0, 8)}-item-${i + 1}.png`}
+                          className="inline-flex items-center gap-2 text-xs text-accent hover:underline font-medium"
+                        >
+                          ⬇ Download design file
+                        </a>
+                      </div>
+                    ) : (
+                      <p className="text-xs text-muted-foreground italic">No design file saved</p>
+                    )}
+                  </div>
+                )}
+              </div>
+            ))}
+
+            <div className="border-t border-border pt-4 flex justify-between items-center">
+              <div className="text-sm text-muted-foreground">
+                Payment: <span className="font-medium text-foreground">{order.payment_method}</span>
+                {' • '}
+                <span className={order.payment_status === 'paid' ? 'text-green-500' : 'text-yellow-500'}>
+                  {order.payment_status}
+                </span>
+              </div>
+              <p className="font-bold text-lg">{order.total_price} EGP</p>
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+  return (
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4"
+        onClick={onClose}
+      >
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          className="bg-card border border-border rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+          onClick={e => e.stopPropagation()}
+        >
+          <div className="flex items-center justify-between p-6 border-b border-border">
+            <div>
+              <h2 className="font-bold text-lg">Order #{order.id.slice(0, 8)}</h2>
+              <p className="text-sm text-muted-foreground">{order.customer_name} — {order.customer_phone}</p>
+              <p className="text-xs text-muted-foreground">{order.city} — {order.shipping_address}</p>
+            </div>
+            <button onClick={onClose} className="p-2 hover:bg-muted rounded-lg transition-colors">
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+
           <div className="p-6 space-y-4">
             <h3 className="font-semibold text-sm uppercase tracking-wider text-muted-foreground">Items Ordered</h3>
             {(order.items || []).map((item: any, i: number) => (
