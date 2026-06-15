@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Package, DollarSign, Lock, CheckCircle, Printer, Box, Truck, ShoppingBag, Plus, Trash2, Upload, X, Sparkles } from 'lucide-react';
 import { Button } from '../components/ui/button';
@@ -42,8 +42,8 @@ function OrderModal({ order, onClose }: { order: Order; onClose: () => void }) {
           <div className="flex items-center justify-between p-6 border-b border-border">
             <div>
               <h2 className="font-bold text-lg">Order #{order.id.slice(0, 8)}</h2>
-              <p className="text-sm text-muted-foreground">{order.customer_name} — {order.customer_phone}</p>
-              <p className="text-xs text-muted-foreground">{order.city} — {order.shipping_address}</p>
+              <p className="text-sm text-muted-foreground">{order.customer_name} â€” {order.customer_phone}</p>
+              <p className="text-xs text-muted-foreground">{order.city} â€” {order.shipping_address}</p>
             </div>
             <button onClick={onClose} className="p-2 hover:bg-muted rounded-lg transition-colors">
               <X className="w-5 h-5" />
@@ -68,7 +68,7 @@ function OrderModal({ order, onClose }: { order: Order; onClose: () => void }) {
                   <div className="flex-1 min-w-0">
                     <p className="font-semibold">{item.name}</p>
                     <p className="text-sm text-muted-foreground">
-                      Size: {item.size} • Color: {item.color} • Qty: {item.quantity}
+                      Size: {item.size} â€¢ Color: {item.color} â€¢ Qty: {item.quantity}
                     </p>
                     <p className="text-sm font-medium mt-1">{item.price * item.quantity} EGP</p>
                   </div>
@@ -86,7 +86,7 @@ function OrderModal({ order, onClose }: { order: Order; onClose: () => void }) {
                       <p>Print fee: <span className="text-accent font-bold">+{item.custom.fee} EGP</span></p>
                     </div>
 
-                    {/* Design file — large and clear for printing */}
+                    {/* Design file â€” large and clear for printing */}
                     {item.custom.dataUrl ? (
                       <div className="space-y-2">
                         <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Design File</p>
@@ -99,6 +99,7 @@ function OrderModal({ order, onClose }: { order: Order; onClose: () => void }) {
                           />
                         </div>
                         
+                        <a
                           href={item.custom.dataUrl}
                           download={['design-order', order.id.slice(0, 8), 'item', String(i + 1)].join('-') + '.png'}
                           className="inline-flex items-center gap-2 text-xs text-accent hover:underline font-medium"
@@ -117,7 +118,7 @@ function OrderModal({ order, onClose }: { order: Order; onClose: () => void }) {
             <div className="border-t border-border pt-4 flex justify-between items-center">
               <div className="text-sm text-muted-foreground">
                 Payment: <span className="font-medium text-foreground">{order.payment_method}</span>
-                {' • '}
+                {' â€¢ '}
                 <span className={order.payment_status === 'paid' ? 'text-green-500' : 'text-yellow-500'}>
                   {order.payment_status}
                 </span>
@@ -149,8 +150,8 @@ function OrderModal({ order, onClose }: { order: Order; onClose: () => void }) {
           <div className="flex items-center justify-between p-6 border-b border-border">
             <div>
               <h2 className="font-bold text-lg">Order #{order.id.slice(0, 8)}</h2>
-              <p className="text-sm text-muted-foreground">{order.customer_name} — {order.customer_phone}</p>
-              <p className="text-xs text-muted-foreground">{order.city} — {order.shipping_address}</p>
+              <p className="text-sm text-muted-foreground">{order.customer_name} â€” {order.customer_phone}</p>
+              <p className="text-xs text-muted-foreground">{order.city} â€” {order.shipping_address}</p>
             </div>
             <button onClick={onClose} className="p-2 hover:bg-muted rounded-lg transition-colors">
               <X className="w-5 h-5" />
@@ -185,7 +186,7 @@ function OrderModal({ order, onClose }: { order: Order; onClose: () => void }) {
                   <div className="flex-1 min-w-0">
                     <p className="font-semibold">{item.name}</p>
                     <p className="text-sm text-muted-foreground">
-                      Size: {item.size} • Color: {item.color} • Qty: {item.quantity}
+                      Size: {item.size} â€¢ Color: {item.color} â€¢ Qty: {item.quantity}
                     </p>
                     <p className="text-sm font-medium mt-1">{item.price * item.quantity} EGP</p>
 
@@ -195,7 +196,7 @@ function OrderModal({ order, onClose }: { order: Order; onClose: () => void }) {
                           <Sparkles className="w-3 h-3" /> Custom Print
                         </p>
                         <p className="text-xs text-muted-foreground">
-                          Size: {item.custom.printSize} • Fee: +{item.custom.fee} EGP
+                          Size: {item.custom.printSize} â€¢ Fee: +{item.custom.fee} EGP
                         </p>
                         {item.custom.dataUrl && (
                           <img
@@ -214,7 +215,7 @@ function OrderModal({ order, onClose }: { order: Order; onClose: () => void }) {
             <div className="border-t border-border pt-4 flex justify-between items-center">
               <div className="text-sm text-muted-foreground">
                 Payment: <span className="font-medium text-foreground">{order.payment_method}</span>
-                {' • '}
+                {' â€¢ '}
                 <span className={order.payment_status === 'paid' ? 'text-green-500' : 'text-yellow-500'}>
                   {order.payment_status}
                 </span>
@@ -293,15 +294,15 @@ export function AdminPage() {
       images, sizes, colors, featured: form.featured,
     });
     setSaving(false);
-    if (error) setSaveMsg('❌ Error: ' + error.message);
-    else { setSaveMsg('✅ تم إضافة المنتج!'); setForm(emptyForm); }
+    if (error) setSaveMsg('â‌Œ Error: ' + error.message);
+    else { setSaveMsg('âœ… طھظ… ط¥ط¶ط§ظپط© ط§ظ„ظ…ظ†طھط¬!'); setForm(emptyForm); }
   };
 
   const handleDelete = async (id: string, name: string) => {
-    if (!confirm(`هتحذف "${name}"؟`)) return;
+    if (!confirm(`ظ‡طھط­ط°ظپ "${name}"طں`)) return;
     const error = await deleteProduct(id);
     if (error) toast.error('Error: ' + error.message);
-    else toast.success('تم حذف المنتج');
+    else toast.success('طھظ… ط­ط°ظپ ط§ظ„ظ…ظ†طھط¬');
   };
 
   if (!isAuthenticated) {
@@ -340,7 +341,7 @@ export function AdminPage() {
       <div className="container mx-auto max-w-7xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
           <h1 className="uppercase tracking-[0.2em] mb-2" style={{ fontSize: '3rem', fontWeight: 600 }}>Admin Dashboard</h1>
-          <p className="text-muted-foreground mb-8">Manage your ÖZEL store</p>
+          <p className="text-muted-foreground mb-8">Manage your أ–ZEL store</p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             {stats.map((stat, i) => (
@@ -492,7 +493,7 @@ export function AdminPage() {
                             <div key={i} className="relative w-20 h-20 group">
                               <img src={url.trim()} alt="" className="w-full h-full object-cover rounded-sm" />
                               <button type="button" onClick={() => removeImage(i)}
-                                className="absolute -top-1 -right-1 w-5 h-5 bg-destructive rounded-full text-white text-xs flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">×</button>
+                                className="absolute -top-1 -right-1 w-5 h-5 bg-destructive rounded-full text-white text-xs flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">أ—</button>
                             </div>
                           ))}
                         </div>
@@ -503,7 +504,7 @@ export function AdminPage() {
                     <input type="checkbox" id="featured" checked={form.featured} onChange={e => setForm({...form, featured: e.target.checked})} className="w-4 h-4 accent-red-600" />
                     <Label htmlFor="featured">Featured on homepage</Label>
                   </div>
-                  {saveMsg && <p className={`text-sm ${saveMsg.startsWith('✅') ? 'text-green-500' : 'text-red-500'}`}>{saveMsg}</p>}
+                  {saveMsg && <p className={`text-sm ${saveMsg.startsWith('âœ…') ? 'text-green-500' : 'text-red-500'}`}>{saveMsg}</p>}
                   <Button type="submit" disabled={saving || uploadingImages} className="w-full bg-accent hover:bg-accent/90 uppercase tracking-wider">
                     <Plus className="w-4 h-4 mr-2" />{saving ? 'Saving...' : 'Add Product'}
                   </Button>
@@ -538,7 +539,7 @@ export function AdminPage() {
                             <td className="p-4 text-sm text-muted-foreground">{product.collection}</td>
                             <td className="p-4">{product.price} EGP</td>
                             <td className="p-4">
-                              {product.featured ? <span className="text-xs px-2 py-1 bg-accent/10 text-accent rounded-full">Featured</span> : <span className="text-muted-foreground text-xs">—</span>}
+                              {product.featured ? <span className="text-xs px-2 py-1 bg-accent/10 text-accent rounded-full">Featured</span> : <span className="text-muted-foreground text-xs">â€”</span>}
                             </td>
                             <td className="p-4">
                               <Button variant="ghost" size="icon" className="text-destructive hover:text-destructive" onClick={() => handleDelete(product.id, product.name)}>
@@ -561,3 +562,4 @@ export function AdminPage() {
     </div>
   );
 }
+
